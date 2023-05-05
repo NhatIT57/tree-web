@@ -1,0 +1,50 @@
+.page-contact-us {
+  height: 100vh;
+  padding-right: 50px;
+
+  .__bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-border);
+    background-color: var(--backgroud-color-logo);
+    padding: 7px 20px;
+    margin-bottom: 16px;
+    border-radius: 7px;
+    h2 {
+      margin: 0;
+    }
+  }
+
+  input,
+  textarea {
+    border: 0;
+  }
+
+  .form-contact-us {
+    .form-control {
+      background-color: var(--backgroud-color);
+      padding: 25px 20px;
+      color: var(--text-color);
+    }
+    button {
+      float: right;
+      color: #000;
+    }
+  }
+  @media (max-width: 739px) {
+    /* mobile : width < 740px*/
+    height: 100%;
+    & > div {
+      width: 100%;
+    }
+  }
+  /* ( min-width: 740px = 46.25em) and (max-width: 1023px = 63.9375em) */
+  @media (min-width: 740px) and (max-width: 1023px) {
+    /* tablet : width >= 740px and : width < 1024px*/
+  }
+  /* ( min-width: 1024px = 64em) */
+  @media (min-width: 1024px) {
+    /* PC : width >= 1024px*/
+  }
+}

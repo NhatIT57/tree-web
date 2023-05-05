@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "petcommunity102": {
+      "hosting": {
+        "angular-seed": [
+          "petcommunity102"
+        ]
+      }
+    }
+  }
+}

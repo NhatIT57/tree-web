@@ -1,0 +1,104 @@
+.main-container {
+  .main-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+  }
+  .main-content {
+    max-height: fit-content;
+    min-height: calc(100vh - 115px);
+    margin-top: 115px;
+
+    display: flex;
+    padding: 50px;
+    justify-content: space-between;
+
+    & > div:first-child {
+      width: 71.4%;
+    }
+    & > div:last-child {
+      // flex: auto;
+      width: 25%;
+      height: 500px;
+      // margin-left: 50px;
+      position: relative;
+
+      // width: 300px;
+      // height: 488px;
+      // position: fixed;
+      // right: 16.6%;
+
+      // app-outlet-right {
+      //   // transition: 1s all;
+
+      //   // position: fixed;
+      //   // width: calc(100vw - 77vw);
+      //   // height: 65.5vh;
+      // }
+      // .active-scroll {
+      //   height: 165px;
+      //   &::ng-deep {
+      //     .gradient {
+      //       .content {
+      //         padding: 11px 7px;
+      //         h5 {
+      //           display: none;
+      //         }
+      //         .details {
+      //           display: none;
+      //         }
+      //       }
+      //       .icons {
+      //         top: 0;
+      //         right: 7px;
+      //       }
+      //     }
+      //   }
+      // }
+    }
+  }
+  .main-footer {
+    position: relative;
+    z-index: 9;
+  }
+
+  @media (max-width: 739px) {
+    .main-content {
+      margin-top: 145px;
+      padding-left: 0;
+      padding-right: 0;
+      & > div:first-child {
+        width: 100%;
+      }
+      & > div:last-child {
+        display: none;
+      }
+    }
+  }
+  @media (min-width: 740px) and (max-width: 1023px) {
+    .main-content {
+      margin-top: 145px;
+      & > div:first-child {
+        width: 100%;
+      }
+      & > div:last-child {
+        display: none;
+      }
+    }
+  }
+  // @media (min-width: 1024px) and (max-width: 1366px) {
+  //   .main-content {
+  //     & > div:last-child {
+  //       right: 4%;
+  //     }
+  //   }
+  // }
+
+  @media (min-width: 1367px) {
+    .main-content {
+      width: 77%;
+      margin: 116px auto 0;
+    }
+  }
+}

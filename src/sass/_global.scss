@@ -1,0 +1,132 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: "Nunito";
+  src: url("../assets/fonts/Nunito/Nunito-Light.ttf");
+}
+
+body {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: normal;
+
+  padding: 0 !important;
+
+  letter-spacing: 1px;
+  color: var(--text-color);
+  background-color: var(--backgroud-color-body);
+  // background-image: linear-gradient(
+  //   125deg,
+  //   var(--backgroud-color-logo),
+  //   var(--backgroud-color),
+  //   var(--backgroud-color-light),
+  //   var(--color-orange)
+  // );
+
+  &::-webkit-scrollbar {
+    width: 0px;
+    // background-color: var(--backgroud-color-logo);
+  }
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    // background-color: var(--backgroud-color-logo);
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: var(--text-color);
+  }
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.modal {
+  z-index: 9999;
+}
+.modal-content {
+  border-radius: 12px;
+  border: 0;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+
+  left: 0;
+  right: 0;
+  z-index: 9;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: 1s all;
+  overflow: hidden;
+}
+
+.line-clamp {
+  // height: 2.4rem;
+  // line-height: 1.2rem;
+  // overflow: hidden;
+  // text-overflow: ellipsis;
+  // white-space: nowrap;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.border-error {
+  border: 1px solid #dc143c;
+}
+
+.txt-error {
+  color: #dc143c;
+  font-weight: 600;
+}
+
+.txt-success {
+  color: #00ff7f;
+  font-weight: 600;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+  width: 7%;
+  opacity: 1;
+}
+.carousel-indicators {
+  bottom: -50px;
+}
+
+.text-overflow {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.btn-delete {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 99;
+}

@@ -1,0 +1,190 @@
+.header-wiz {
+  padding: 30px 50px;
+  background-color: var(--backgroud-color);
+  border-bottom: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border);
+
+  transition: 1s all;
+  position: relative;
+  z-index: 10;
+
+  .active {
+    background-color: var(--color-orange);
+    border-radius: 7px;
+    // border-bottom: 2px solid var(--color-orange);
+    color: var(--backgroud-color-body);
+  }
+  .nav-link {
+    &:hover {
+      @extend .active;
+    }
+  }
+
+  a {
+    color: var(--text-color);
+    font-weight: 600;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    a {
+      margin: 0 16px;
+      font-size: 15px;
+      padding: 8px 16px;
+      width: fit-content;
+    }
+
+    .navbar-brand {
+      margin-right: auto;
+      font-size: 22px;
+      .logo {
+        width: 85px;
+        height: 79px;
+        top: 0;
+        position: absolute;
+        margin-top: -14px;
+      }
+    }
+    .navbar-collapse {
+      justify-content: flex-end;
+    }
+    .navbar-toggler {
+      border: 0;
+      outline: none;
+
+      .ham {
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        transition: transform 400ms;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      .hamRotate.active {
+        transform: rotate(45deg);
+      }
+      .hamRotate180.active {
+        transform: rotate(180deg);
+      }
+      .line {
+        fill: none;
+        transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+        stroke: #000;
+        stroke-width: 5.5;
+        stroke-linecap: round;
+      }
+      .ham3 .top {
+        stroke-dasharray: 40 130;
+      }
+      .ham3 .middle {
+        stroke-dasharray: 40 140;
+      }
+      .ham3 .bottom {
+        stroke-dasharray: 40 205;
+      }
+      .ham3.active .top {
+        stroke-dasharray: 75 130;
+        stroke-dashoffset: -63px;
+      }
+      .ham3.active .middle {
+        stroke-dashoffset: -102px;
+      }
+      .ham3.active .bottom {
+        stroke-dasharray: 110 205;
+        stroke-dashoffset: -86px;
+      }
+    }
+  }
+  .sign_out {
+    a {
+      cursor: pointer;
+    }
+    ._card {
+      display: none;
+    }
+    &:hover {
+      ._card {
+        display: block;
+      }
+    }
+  }
+  .card_profile {
+    background-color: #222831;
+    // height: 20rem;
+    width: 16rem;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.7);
+    color: white;
+    position: absolute;
+    top: 0;
+    right: 0;
+    // margin-top: 40px;
+    margin-top: 7px;
+    transform: scale(0.8);
+  }
+
+  .card__name {
+    margin-top: 15px;
+    line-break: auto;
+    text-align: center;
+    font-size: 16px;
+    padding: 0 26px;
+  }
+
+  .card__image {
+    height: 160px;
+    width: 160px;
+    border-radius: 50%;
+    border: 5px solid #272133;
+    margin-top: 20px;
+    box-shadow: 0 10px 50px var(--backgroud-color-logo);
+  }
+
+  .card__button {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    padding: 10px 0 30px;
+
+    .btn-success {
+      background-color: var(--backgroud-color-logo);
+      border: 0;
+      &:hover {
+        background-color: var(--backgroud-color-light);
+      }
+    }
+  }
+
+  @media (max-width: 739px) {
+    .navbar {
+      .navbar-brand {
+        .logo {
+          margin-top: 0px;
+        }
+      }
+    }
+    .modal-dialog {
+      max-width: 100%;
+    }
+  }
+  @media (min-width: 740px) and (max-width: 1023px) {
+    .navbar {
+      .navbar-brand {
+        .logo {
+          margin-top: 0px;
+        }
+      }
+    }
+    .modal-dialog {
+      max-width: 90%;
+    }
+  }
+  @media (min-width: 1024px) {
+  }
+}

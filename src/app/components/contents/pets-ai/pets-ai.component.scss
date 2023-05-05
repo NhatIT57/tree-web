@@ -1,0 +1,45 @@
+.page-ai {
+  & > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 1px solid var(--color-border);
+    background-color: var(--backgroud-color-logo);
+    padding: 7px 20px;
+
+    margin-bottom: 16px;
+    border-radius: 7px;
+    h2 {
+      margin: 0;
+      font-weight: bold;
+    }
+  }
+
+  & > div:last-child {
+    display: flex;
+    justify-content: space-between;
+
+    .label {
+      padding: 0 0 0 20px;
+      p {
+        span {
+          font-size: 32px;
+          font-weight: 700;
+        }
+      }
+    }
+
+    @media (max-width: 739px) {
+      flex-wrap: wrap;
+      justify-content: center;
+      .webcam {
+        overflow: hidden;
+      }
+    }
+    @media (min-width: 740px) and (max-width: 1023px) {
+    }
+    @media (min-width: 1024px) {
+    }
+  }
+}

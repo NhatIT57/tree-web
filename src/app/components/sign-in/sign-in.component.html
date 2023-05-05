@@ -1,0 +1,225 @@
+<div class="container" id="container" [hidden]="!isShow">
+  <div class="form-container sign-up-container">
+    <form
+      action="#"
+      class="_form-register"
+      (ngSubmit)="onSubmitRegister(formRegister.value)"
+      [formGroup]="formRegister"
+    >
+      <h1 class="mt-3">Đăng ký</h1>
+      <input
+        type="text"
+        name="name"
+        placeholder="Họ và Tên*"
+        formControlName="FullName"
+        [ngClass]="
+          formRegister.get('FullName').invalid &&
+          formRegister.get('FullName').touched
+            ? 'border-error'
+            : 'sucess'
+        "
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Email đăng nhập*"
+        formControlName="Username"
+        [ngClass]="
+          formRegister.get('Username').invalid &&
+          formRegister.get('Username').touched
+            ? 'border-error'
+            : 'sucess'
+        "
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Mật khẩu*"
+        formControlName="Password"
+        [ngClass]="
+          formRegister.get('Password').invalid &&
+          formRegister.get('Password').touched
+            ? 'border-error'
+            : 'sucess'
+        "
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Xác nhận mật khẩu*"
+        formControlName="Password_CF"
+        (keyup)="onCheckConfirmPassword($event)"
+        [ngClass]="
+          formRegister.get('Password_CF').invalid &&
+          formRegister.get('Password_CF').touched
+            ? 'border-error'
+            : 'sucess'
+        "
+      />
+      <input
+        type="text"
+        name="phonenumber"
+        placeholder="Số điện thoại*"
+        formControlName="PhoneNumber"
+        maxlength="10"
+        [ngClass]="
+          formRegister.get('PhoneNumber').invalid &&
+          formRegister.get('PhoneNumber').touched
+            ? 'border-error'
+            : 'sucess'
+        "
+      />
+
+      <div class="__sign-in-checkbox">
+        <label class="txt-error showErrorRegister form-check-label"></label>
+
+        <label class="txt-success showSuccessRegister form-check-label"></label>
+        <label class="form-check-label text-danger">{{
+          isShowTextErrorRegister
+        }}</label>
+
+        <label class="form-check-label" for="exampleCheck1"
+          >*Yêu cầu mật khẩu phải tối thiểu 8 kí tự.</label
+        >
+      </div>
+
+      <button type="submit" [disabled]="formRegister.invalid">Đăng ký</button>
+      <button class="ghost mobile mt-3" id="signIn" (click)="signIn()">
+        Đăng nhập
+      </button>
+    </form>
+  </div>
+  <div class="form-container sign-in-container">
+    <form
+      action="#"
+      class="_form-login"
+      (ngSubmit)="onSubmitLogin(formLogin.value)"
+      [formGroup]="formLogin"
+    >
+      <h1>Đăng nhập</h1>
+      <input
+        type="email"
+        name="email"
+        placeholder="Email*"
+        formControlName="username"
+        [ngClass]="
+          formLogin.get('username').invalid && formLogin.get('username').touched
+            ? 'border-error'
+            : 'sucess'
+        "
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Mật khẩu*"
+        formControlName="password"
+        [ngClass]="
+          formLogin.get('password').invalid && formLogin.get('password').touched
+            ? 'border-error'
+            : 'sucess'
+        "
+      />
+
+      <div class="__sign-in-checkbox">
+        <label class="txt-error showErrorLogin form-check-label"></label>
+
+        <!-- <input type="checkbox" id="exampleCheck1" formControlName="checkbox" /> -->
+        <label class="form-check-label" for="exampleCheck1"
+          >*Yêu cầu mật khẩu phải tối thiểu 8 kí tự.</label
+        >
+      </div>
+
+      <button type="submit" [disabled]="formLogin.invalid">Đăng nhập</button>
+      <button class="ghost mobile mt-3" id="signUp" (click)="signUp()">
+        Tạo tài khoản
+      </button>
+    </form>
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <h1>PETCOMMUNITY!</h1>
+        <p>
+          Để giữ kết nối với chúng tôi, vui lòng đăng nhập bằng thông tin cá
+          nhân của bạn.
+        </p>
+        <button class="ghost" id="signIn" (click)="signIn()">Đăng nhập</button>
+      </div>
+      <div class="overlay-panel overlay-right">
+        <h1>Xin chào, bạn!</h1>
+        <p>
+          Nếu bạn chưa có tài khoản, hãy nhấp vào nút bên dưới để tạo tài khoản
+          của bạn.
+        </p>
+        <button class="ghost" id="signUp" (click)="signUp()">
+          Tạo tài khoản
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="forgot-password" [hidden]="isShow">
+  <div>
+    <h1 class="mb-3">Đổi mật khẩu</h1>
+    <!-- <label for=""
+      >You should receive password recovery link on your email.</label
+    > -->
+    <form
+      action=""
+      (ngSubmit)="onSubmitChangePassword(formChangePassword.value)"
+      [formGroup]="formChangePassword"
+    >
+      <input
+        id="emailTMP"
+        type="email"
+        name="email"
+        placeholder="Email*"
+        formControlName="usernamePW"
+        [ngClass]="
+          formChangePassword.get('usernamePW').invalid &&
+          formChangePassword.get('usernamePW').touched
+            ? 'border-error'
+            : 'sucess'
+        "
+      />
+      <input
+        name="password"
+        type="password"
+        placeholder="Mật khẩu cũ*"
+        formControlName="oldPassword"
+        [ngClass]="
+          formChangePassword.get('oldPassword').invalid &&
+          formChangePassword.get('oldPassword').touched
+            ? 'border-error'
+            : 'sucess'
+        "
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Mật khẩu mới*"
+        formControlName="newPassword"
+        [ngClass]="
+          formChangePassword.get('newPassword').invalid &&
+          formChangePassword.get('newPassword').touched
+            ? 'border-error'
+            : 'sucess'
+        "
+      />
+      <div class="__sign-in-checkbox">
+        <!-- <input type="checkbox" id="exampleCheck1" formControlName="checkbox" /> -->
+        <label class="form-check-label text-light" for="exampleCheck1"
+          >*Yêu cầu mật khẩu phải tối thiểu 8 kí tự.</label
+        >
+      </div>
+      <label class="txt-error showErrorChangePassWord"></label>
+      <label class="txt-success showSuccessChangePassWord"></label>
+
+      <div>
+        <button type="submit" [disabled]="formChangePassword.invalid">
+          Lưu thay đổi
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

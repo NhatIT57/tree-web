@@ -1,0 +1,82 @@
+.main {
+  background-color: var(--backgroud-color-logo);
+  height: 100%;
+  border-radius: 7px;
+  // background-image: url(../../../assets/img/pony.jpg);
+
+  box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.5);
+  transition: 1s all;
+
+  background-size: cover;
+  .gradient {
+    height: 100%;
+    width: 100%;
+    border-radius: 7px;
+    position: relative;
+
+    top: 0;
+    color: white;
+    background: linear-gradient(
+      to top,
+      var(--backgroud-color-logo),
+      rgba(253, 252, 252, 0.21)
+    );
+  }
+
+  .content {
+    bottom: 0;
+    position: absolute;
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    width: 70%;
+  }
+  p {
+    margin: 0;
+  }
+
+  .details {
+    font-style: italic;
+    // white-space: nowrap;
+    // overflow: hidden;
+    // text-overflow: ellipsis;
+    @media (min-width: 740px) and (max-width: 1173px) {
+      display: none;
+    }
+  }
+
+  .icons {
+    display: flex;
+    flex-direction: column;
+    top: 10px;
+    position: absolute;
+    right: 16px;
+
+    svg {
+      font-size: 30px;
+      margin-bottom: 20px;
+      color: white;
+      transition: 0.3s;
+
+      cursor: pointer;
+
+      &:hover {
+        color: var(--backgroud-color-light);
+      }
+    }
+  }
+  @media (max-width: 739px) {
+  }
+  @media (min-width: 740px) and (max-width: 1023px) {
+    .details {
+      display: none;
+    }
+  }
+  @media (min-width: 1024px) {
+  }
+}

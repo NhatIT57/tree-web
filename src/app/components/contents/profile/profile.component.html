@@ -1,0 +1,481 @@
+<div class="emp-profile">
+  <div
+    class="btn-delete"
+    role="button"
+    (click)="deleteUser()"
+    *ngIf="role === 'admin'"
+  >
+    <i class="fas fa-trash"></i>
+  </div>
+  <form method="post">
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <div class="profile-img">
+          <img
+            src="{{ dataProfile?.picture_url }}"
+            alt=""
+            onerror="this.src='assets/img/avatar_template.jpg';"
+          />
+          <div class="file btn btn-lg btn-primary" *ngIf="idCurrent">
+            Đổi ảnh đại diện
+            <input
+              type="file"
+              name="file"
+              accept=".png, .jpg, .jpeg"
+              enctype="multipart/form-data"
+              (change)="onSelectFile($event)"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="profile-head">
+          <h5 class="">{{ dataProfile?.fullName }}</h5>
+          <!-- <h6>{{ dataProfile?.createAt | date: "dd/MM/yyyy" }}</h6> -->
+          <!-- <p class="proile-rating">RANKINGS : <span>8/10</span></p> -->
+          <ul class="nav nav-tabs mb-0" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a
+                class="nav-link text-dark active"
+                id="home-tab"
+                data-toggle="tab"
+                href="#home"
+                role="tab"
+                aria-controls="home"
+                aria-selected="true"
+                >Thông tin tài khoản</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-dark"
+                id="profile-tab"
+                data-toggle="tab"
+                href="#profile"
+                role="tab"
+                aria-controls="profile"
+                aria-selected="false"
+                *ngIf="arrPets.length !== 0"
+                >Thông tin thú cưng</a
+              >
+            </li>
+            <li class="nav-item" *ngIf="isShow">
+              <a
+                class="nav-link text-dark"
+                id="add-tab"
+                data-toggle="tab"
+                href="#add"
+                role="tab"
+                aria-controls="add"
+                aria-selected="false"
+                >Thêm thú cưng</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- <div class="col-md-2">
+        <span
+          role="button"
+          class="profile-edit-btn"
+          (click)="handleEditProfile()"
+          *ngIf="isShow"
+        >
+          Cập nhật thông tin
+        </span>
+      </div> -->
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tab-content profile-tab" id="myTabContent">
+          <div
+            class="tab-pane fade show active"
+            id="home"
+            role="tabpanel"
+            aria-labelledby="home-tab"
+          >
+            <fieldset id="formAccount">
+              <form
+                (ngSubmit)="onSubmit(formProfile.value)"
+                [formGroup]="formProfile"
+              >
+                <div class="row mb-2">
+                  <div class="col-md-4 my-auto">
+                    <label class="m-0">User Id</label>
+                  </div>
+                  <div class="col-md-8">
+                    <input
+                      type="text"
+                      name="userID"
+                      placeholder="userID"
+                      formControlName="userID"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-md-4 my-auto">
+                    <label class="m-0">Email address</label>
+                  </div>
+                  <div class="col-md-8">
+                    <input
+                      type="text"
+                      name="email"
+                      placeholder="email"
+                      formControlName="email"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-md-4 my-auto">
+                    <label class="m-0">Số điện thoại</label>
+                  </div>
+                  <div class="col-md-8">
+                    <input
+                      type="text"
+                      name="phone"
+                      placeholder="phone"
+                      formControlName="phone"
+                      class="form-control"
+                      maxlength="10"
+                    />
+                  </div>
+                </div>
+                <fieldset [disabled]="!isShow">
+                  <div class="row mb-2">
+                    <div class="col-md-4 my-auto">
+                      <label class="m-0">Họ & Tên</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input
+                        type="text"
+                        name="name"
+                        placeholder="name"
+                        formControlName="name"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                  <div class="row mb-2">
+                    <div class="col-md-4 my-auto">
+                      <label class="m-0">Giới tính</label>
+                    </div>
+                    <div class="col-md-8">
+                      <select
+                        class="custom-select"
+                        id="sex"
+                        formControlName="sex"
+                      >
+                        <option selected value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                        <option value="Khác">Khác</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row mb-2">
+                    <div class="col-md-4 my-auto">
+                      <label class="m-0">Ngày sinh</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input
+                        type="date"
+                        name="born"
+                        placeholder="born"
+                        formControlName="born"
+                        class="form-control"
+                        (change)="calcBirthday()"
+                        min="1990-01-01"
+                        max="2010-01-01"
+                      />
+                    </div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-8">
+                      <small
+                        class="text-danger font-weight-bold"
+                        id="birthDay"
+                        >{{ notifi }}</small
+                      >
+                    </div>
+                  </div>
+                  <div class="row mb-2">
+                    <div class="col-md-4 my-auto">
+                      <label class="m-0">Địa chỉ</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input
+                        type="text"
+                        name="address"
+                        placeholder="address"
+                        formControlName="address"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                </fieldset>
+
+                <div class="row mb-2">
+                  <div class="col-md-4 my-auto"></div>
+                  <div class="col-md-8">
+                    <small class="text-danger font-weight-bold">{{
+                      isStatus
+                    }}</small>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <!-- [disabled]="formProfile.invalid" -->
+                  <button type="submit" class="btn btn-success" *ngIf="isShow">
+                    Lưu thay đổi
+                  </button>
+                </div>
+              </form>
+            </fieldset>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="profile"
+            role="tabpanel"
+            aria-labelledby="profile-tab"
+          >
+            <div
+              id="carouselExampleIndicators"
+              class="carousel slide"
+              data-ride="carousel"
+              data-interval="2000"
+            >
+              <div class="carousel-inner">
+                <ng-container *ngFor="let slide of arrPets">
+                  <div
+                    class="carousel-item"
+                    [ngClass]="slide?.active ? 'active' : ''"
+                  >
+                    <div class="card--pets">
+                      <div
+                        class="btn-delete"
+                        role="button"
+                        (click)="deletePet__ByID(idCurrent, slide.id)"
+                        *ngIf="idCurrent === paramID"
+                      >
+                        <i class="fas fa-trash"></i>
+                      </div>
+                      <div class="__card--profile {{ slide.id }}">
+                        <fieldset id="formPets" [disabled]="true">
+                          <div class="row mb-2">
+                            <div class="col-md-3 my-auto">
+                              <label class="m-0">Tên thú cưng</label>
+                            </div>
+                            <div class="col-md-9">
+                              <input
+                                type="text"
+                                name="name"
+                                placeholder="name pet"
+                                class="form-control"
+                                [value]="slide?.namePet"
+                              />
+                            </div>
+                          </div>
+                          <div class="row mb-2">
+                            <div class="col-md-3 my-auto">
+                              <label class="m-0">Giống</label>
+                            </div>
+                            <div class="col-md-9">
+                              <input
+                                type="text"
+                                name="name"
+                                placeholder="giong"
+                                class="form-control"
+                                [value]="slide?.breed"
+                              />
+                            </div>
+                          </div>
+
+                          <div class="row mb-2">
+                            <div class="col-md-3 my-auto">
+                              <label class="m-0">Ngày sinh</label>
+                            </div>
+                            <div class="col-md-9">
+                              <input
+                                type="text"
+                                name="birthdate"
+                                placeholder="birthdate"
+                                class="form-control"
+                                [value]="slide?.birthdate | date: 'dd/MM/yyyy'"
+                              />
+                            </div>
+                          </div>
+                          <div class="row mb-2">
+                            <div class="col-md-3 my-auto">
+                              <label class="m-0">Màu sắc</label>
+                            </div>
+                            <div class="col-md-9">
+                              <input
+                                type="text"
+                                name="color"
+                                placeholder="color"
+                                class="form-control"
+                                [value]="slide?.color"
+                              />
+                            </div>
+                          </div>
+                        </fieldset>
+                      </div>
+                      <div class="__card--img">
+                        <img
+                          [src]="
+                            slide?.picture_url || 'assets/img/avatar_pet.jpg'
+                          "
+                          alt="image thú cưng"
+                          title="thông tin thú cưng"
+                          onerror="this.src='assets/img/avatar_template.jpg';"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+              <a
+                class="carousel-control-prev"
+                href="#carouselExampleIndicators"
+                role="button"
+                data-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a
+                class="carousel-control-next"
+                href="#carouselExampleIndicators"
+                role="button"
+                data-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="add"
+            role="tabpanel"
+            aria-labelledby="add-tab"
+          >
+            <div class="card--pets">
+              <div class="__card--profile m-0">
+                <fieldset id="formPetsAdd">
+                  <form
+                    (ngSubmit)="onSubmitPets(formPets.value)"
+                    [formGroup]="formPets"
+                  >
+                    <div class="row mb-2">
+                      <div class="col-md-4 my-auto">
+                        <label class="m-0">Tên thú cưng</label>
+                      </div>
+                      <div class="col-md-8">
+                        <input
+                          type="text"
+                          name="name"
+                          placeholder="ten thu cung"
+                          formControlName="namePet"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                    <div class="row mb-2">
+                      <div class="col-md-4 my-auto">
+                        <label class="m-0">Giống</label>
+                      </div>
+                      <div class="col-md-8">
+                        <select
+                          class="custom-select"
+                          id="breed"
+                          formControlName="breed"
+                        >
+                          <option selected value="Đực">Đực</option>
+                          <option value="Cái">Cái</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="row mb-2">
+                      <div class="col-md-4 my-auto">
+                        <label class="m-0">Ngày sinh</label>
+                      </div>
+                      <div class="col-md-8">
+                        <input
+                          type="date"
+                          name="birthdate"
+                          placeholder="birthdate"
+                          formControlName="birthdate"
+                          class="form-control"
+                          min="2010-01-01"
+                        />
+                      </div>
+                    </div>
+                    <div class="row mb-2">
+                      <div class="col-md-4 my-auto">
+                        <label class="m-0">Màu sắc</label>
+                      </div>
+                      <div class="col-md-8">
+                        <input
+                          type="text"
+                          name="color"
+                          placeholder="mau sac"
+                          formControlName="color"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                    <div class="row mb-2">
+                      <div class="col-md-4 my-auto">
+                        <label class="m-0">Ảnh</label>
+                      </div>
+                      <div class="col-md-8">
+                        <div class="form-group __img mb-0">
+                          <label class="mb-0" for="upload-photo"
+                            >Chọn ảnh...</label
+                          >
+                          <input
+                            type="file"
+                            name="photo"
+                            id="upload-photo"
+                            accept=".png, .jpg, .jpeg"
+                            enctype="multipart/form-data"
+                            (change)="onSelectFilePets($event)"
+                            formControlName="img"
+                          />
+                          <input
+                            type="text"
+                            name="upload-img"
+                            class="form-control __custom"
+                            placeholder="chon hinh anh ma ban yeu thich nhat"
+                            value="{{ formPets.get('img').value }}"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="text-right">
+                      <button
+                        type="submit"
+                        class="btn btn-success"
+                        [disabled]="formPets.invalid"
+                        *ngIf="isShow"
+                      >
+                        Thêm
+                      </button>
+                    </div>
+                  </form>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

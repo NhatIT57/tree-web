@@ -1,0 +1,55 @@
+<div
+  class="main"
+  [ngStyle]="{
+    'background-image':
+      'url(' + http + dataProfile?.avatar + ')' &&
+      'url(../../../assets/img/pony.jpg)'
+  }"
+>
+  <div class="gradient">
+    <div class="content">
+      <h2>{{ dataProfile?.fullName}}</h2>
+      <h5>({{ dataProfile?.typeUserName || "" }})</h5>
+      <p>
+        <i class="fas fa-map-marker-alt"></i>&ensp;{{
+          dataProfile?.address ||
+            "Đường số 455 - Lê Văn Việt - Quận 9 - TP.Thủ Đức"
+        }}
+      </p>
+      <p>
+        <i class="fas fa-phone-alt"></i>&ensp;{{
+          dataProfile?.phoneNumber || "0333303819"
+        }}
+      </p>
+      <p class="details">
+        <i class="fas fa-link"></i>&ensp;Web app dành cho những người đam mê hoa lan, tại Web app
+        mọi người trong cộng đồng sử dụng Web app này có thể đăng ký tài khoản
+        để lưu trữ hình ảnh hoa lan của họ, đăng bài chia sẻ kiến thức chăm
+        sóc hoa hoặc đăng bài hỏi hoặc giải đáp thắc mắc về các chủ đề liên
+        quan đến hoa lan của họ..v..v...
+      </p>
+    </div>
+    <div class="icons">
+      <a
+        href="https://www.facebook.com/nhatit577"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <i class="fab fa-facebook-square"></i
+      ></a>
+      <a
+        href="https://www.youtube.com/channel/UCNnr3KTR6cx8UhslnD5V91w/videos"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <i class="fab fa-youtube-square"></i>
+      </a>
+      <a
+        href="https://www.tiktok.com/@meenhmoong21s"
+        target="_blank"
+        rel="noopener noreferrer"
+        ><i class="fab fa-tiktok"></i
+      ></a>
+    </div>
+  </div>
+</div>

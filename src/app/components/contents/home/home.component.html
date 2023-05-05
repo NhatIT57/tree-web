@@ -1,0 +1,242 @@
+<div class="page-home">
+  <div>
+    <h2>Trang chủ</h2>
+
+    <div *ngIf="id">
+      <span class="filter" data-toggle="modal" data-target="#addModal"
+        >Thêm bài viết&ensp;<i class="fas fa-plus"></i
+      ></span>
+    </div>
+  </div>
+  <div *ngFor="let item of listPost">
+    <div class="_page-home-iframe">
+      <div
+        class="btn-delete"
+        role="button"
+        (click)="deletePost__ByID(item.id, item.userID)"
+        *ngIf="role === 'admin'"
+      >
+        <i class="fas fa-trash"></i>
+      </div>
+      <div class="__image" *ngIf="item?.picture !== ''">
+        <img
+          [src]="item?.picture_url"
+          alt="hinh bai dang"
+          onerror="this.src='assets/img/avatar_template.jpg';"
+        />
+      </div>
+      <div class="__content">
+        <div class="__title-iframe">
+          <div routerLink="/profile/{{ item?.info[0]?._id }}" role="button">
+            <img
+              [src]="http + '/' + item?.info[0]?.picture"
+              alt="avatar"
+              onerror="this.src='assets/img/avatar_template.jpg';"
+            />
+          </div>
+          <div>
+            <h5
+              class="mb-0 __fullName"
+              routerLink="/profile/{{ item?.info[0]?._id }}"
+              role="button"
+            >
+              {{ item?.info[0]?.fullName }}
+            </h5>
+            <!-- <span>{{item.created_at | date: "MM/dd/yyyy"}}</span>&nbsp;|&nbsp; -->
+            <small>{{ item.postTime }} - {{ item.postDate }}</small>
+          </div>
+          <div class="text-right mobile__flex">
+            <p>Khu Vực: {{ item.state }}</p>
+            <span
+              role="button"
+              class="__show--comment"
+              (click)="item.showCMT = !item.showCMT"
+              >Bình luận <i class="fas fa-comment"></i
+            ></span>
+          </div>
+        </div>
+        <p [ngClass]="{ 'line-clamp': !item.showMore }" class="mb-0 mt-1">
+          {{ item.description }}
+        </p>
+        <div class="text-right">
+          <a
+            class="more text-light font-weight-bold"
+            role="button"
+            *ngIf="!item.showMore"
+            (click)="item.showMore = true"
+          >
+            xem thêm
+          </a>
+        </div>
+      </div>
+
+      <form class="form-comment" [hidden]="item.showCMT">
+        <div class="form-row">
+          <div class="col-md-12 mb-3">
+            <textarea
+              name="comment"
+              id=""
+              rows="3"
+              type="text"
+              class="form-control"
+              placeholder="nội dung"
+              [(ngModel)]="comment"
+              required
+            ></textarea>
+          </div>
+          <button
+            class="btn-cmt"
+            type="submit"
+            (click)="onSubmitCmt(item.id, item.arrCMT)"
+          >
+            Gửi
+          </button>
+        </div>
+      </form>
+      <div class="comment">
+        <ng-container *ngFor="let cmt of item.arrCMT; let i = index">
+          <div class="__cmt" *ngIf="i < item.limit">
+            <div
+              class="btn-delete"
+              role="button"
+              (click)="deleteComment__ByID(cmt._id, cmt.commenter)"
+              *ngIf="role === 'admin'"
+            >
+              <i class="fas fa-trash"></i>
+            </div>
+            <div
+              class="image"
+              routerLink="/profile/{{ cmt.commenter }}"
+              role="button"
+            >
+              <img
+                [src]="http + '/' + cmt.info[0].picture"
+                alt=""
+                onerror="this.src='assets/img/avatar_template.jpg';"
+              />
+            </div>
+            <div class="__info--cmt">
+              <h6
+                class="mb-0 __fullName"
+                routerLink="/profile/{{ cmt.commenter }}"
+                role="button"
+              >
+                {{ cmt.info[0].fullName }}
+              </h6>
+              <small>{{ cmt.registerDate }}</small>
+            </div>
+            <p [innerText]="cmt.message"></p>
+          </div>
+        </ng-container>
+        <div class="text-right">
+          <a
+            class="more text-light font-weight-bold"
+            role="button"
+            (click)="item.limit = item.limit + 5"
+          >
+            xem thêm bình luận
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="button" class="btn" (click)="onNext()">Xem thêm</button>
+</div>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="addModal"
+  tabindex="-1"
+  aria-labelledby="addModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form (ngSubmit)="onSubmitPosts(formPost.value)" [formGroup]="formPost">
+          <div class="row mb-2">
+            <div class="col-md-2 my-auto">
+              <label class="m-0 text-dark">Quận</label>
+            </div>
+            <div class="col-md-10">
+              <select
+                class="custom-select text-dark"
+                id="state"
+                formControlName="state"
+              >
+                <ng-container *ngFor="let item of dataDistricts">
+                  <option [value]="item.name">{{ item.name }}</option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-2 my-auto">
+              <label class="m-0 text-dark">Ảnh</label>
+            </div>
+            <div class="col-md-10">
+              <div class="form-group __img">
+                <label for="upload-photo">Chọn ảnh...</label>
+                <input
+                  type="file"
+                  name="photo"
+                  id="upload-photo"
+                  accept=".png, .jpg, .jpeg"
+                  enctype="multipart/form-data"
+                  (change)="onSelectFile($event)"
+                  formControlName="img"
+                />
+                <input
+                  type="text"
+                  name="upload-img"
+                  class="form-control __custom"
+                  placeholder="chon hinh anh ma ban yeu thich nhat"
+                  value="{{ formPost.get('img').value }}"
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-2">
+              <label class="m-0 text-dark">Nội dung</label>
+            </div>
+            <div class="col-md-10">
+              <textarea
+                type="text"
+                name="name"
+                id="nd"
+                cols="30"
+                rows="10"
+                class="form-control"
+                placeholder="noi dung"
+                formControlName="description"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="text-right">
+            <button
+              id="close"
+              type="button"
+              class="btn btn-secondary mr-3"
+              data-dismiss="modal"
+            >
+              Đóng
+            </button>
+            <button
+              type="submit"
+              class="btn btn-success"
+              [disabled]="
+                formPost.get('description').invalid ||
+                formPost.get('state').invalid
+              "
+            >
+              Thêm
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
