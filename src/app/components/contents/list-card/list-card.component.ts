@@ -20,7 +20,7 @@ export class ListCardComponent implements OnInit {
   constructor(private serviceHome: HomeService) {}
 
   ngOnInit(): void {
-    this.getAllPets(this.numbA, this.numbB);
+    this.getAllFlower(this.numbA, this.numbB);
     this.toTop();
   }
 
@@ -31,10 +31,10 @@ export class ListCardComponent implements OnInit {
     });
   }
 
-  getAllPets(a, b): void {
-    this.serviceHome.getAllListPets().subscribe((res) => {
-      if (res && res.pets !== '') {
-        this.dataListCard = res.pets.splice(a, b);
+  getAllFlower(a, b): void {
+    this.serviceHome.getAllListFlower().subscribe((res) => {
+      if (res && res.Flower !== '') {
+        this.dataListCard = res.trees.splice(a, b);
         this.countListCard = res.count;
       }
     });
@@ -51,7 +51,7 @@ export class ListCardComponent implements OnInit {
     this.numbA += 9;
     this.numbB += 9;
     // this.goToPage(this.currentPageNumber + 1);
-    this.getAllPets(this.numbA, this.numbB);
+    this.getAllFlower(this.numbA, this.numbB);
   }
   previousPagination(): void {
     if (this.numbA === 0) {
@@ -63,7 +63,7 @@ export class ListCardComponent implements OnInit {
     });
     this.numbA -= 9;
     this.numbB -= 9;
-    this.getAllPets(this.numbA, this.numbB);
+    this.getAllFlower(this.numbA, this.numbB);
   }
   //#endregion
 }

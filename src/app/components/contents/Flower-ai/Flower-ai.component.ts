@@ -3,12 +3,12 @@ import * as tmImage from '@teachablemachine/image';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
-  selector: 'app-pets-ai',
-  templateUrl: './pets-ai.component.html',
-  styleUrls: ['./pets-ai.component.scss'],
+  selector: 'app-Flower-ai',
+  templateUrl: './Flower-ai.component.html',
+  styleUrls: ['./Flower-ai.component.scss'],
 })
-export class PetsAiComponent implements OnInit, OnDestroy {
-  url = 'https://teachablemachine.withgoogle.com/models/a0N_P5ZOA/';
+export class FlowerAiComponent implements OnInit, OnDestroy {
+  url = 'https://teachablemachine.withgoogle.com/models/RLSIInxw_/';
   model;
   predictions;
   webcam;
@@ -18,7 +18,7 @@ export class PetsAiComponent implements OnInit, OnDestroy {
   constructor(private spinner: NgxSpinnerService) {}
 
   ngOnInit(): void {
-    this.aiPets();
+    this.aiFlower();
     /** spinner starts on init */
     this.spinner.show();
     this.toTop();
@@ -31,7 +31,7 @@ export class PetsAiComponent implements OnInit, OnDestroy {
     });
   }
 
-  async aiPets(): Promise<void> {
+  async aiFlower(): Promise<void> {
     if (!('mediaDevices' in navigator) || !('RTCPeerConnection' in window)) {
       alert('Sorry, your browser does not support WebRTC.');
       return;
@@ -76,13 +76,13 @@ export class PetsAiComponent implements OnInit, OnDestroy {
     // }
   }
   // tslint:disable-next-line:typedef
-  async aiPetsClose() {
+  async aiFlowerClose() {
     this.isShow = true;
     await this.webcam.stop();
     document.getElementById('webcam-container').removeChild(this.webcam.canvas);
   }
   async ngOnDestroy(): Promise<void> {
-    await this.aiPetsClose();
+    await this.aiFlowerClose();
     if (this.isShow === false) {
       this.webcam.stop();
     }

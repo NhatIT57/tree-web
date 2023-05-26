@@ -55,8 +55,8 @@
                 role="tab"
                 aria-controls="profile"
                 aria-selected="false"
-                *ngIf="arrPets.length !== 0"
-                >Thông tin thú cưng</a
+                *ngIf="arrFlower.length !== 0"
+                >Thông tin Hoa Lan</a
               >
             </li>
             <li class="nav-item" *ngIf="isShow">
@@ -68,7 +68,7 @@
                 role="tab"
                 aria-controls="add"
                 aria-selected="false"
-                >Thêm thú cưng</a
+                >Thêm Hoa Lan</a
               >
             </li>
           </ul>
@@ -220,6 +220,9 @@
                     <small class="text-danger font-weight-bold">{{
                       isStatus
                     }}</small>
+                    <small class="txt-success form-check-label">{{
+                      isStatuss
+                    }}</small>
                   </div>
                 </div>
                 <div class="text-right">
@@ -244,12 +247,12 @@
               data-interval="2000"
             >
               <div class="carousel-inner">
-                <ng-container *ngFor="let slide of arrPets">
+                <ng-container *ngFor="let slide of arrFlower">
                   <div
                     class="carousel-item"
                     [ngClass]="slide?.active ? 'active' : ''"
                   >
-                    <div class="card--pets">
+                    <div class="card--Flower">
                       <div
                         class="btn-delete"
                         role="button"
@@ -259,10 +262,10 @@
                         <i class="fas fa-trash"></i>
                       </div>
                       <div class="__card--profile {{ slide.id }}">
-                        <fieldset id="formPets" [disabled]="true">
+                        <fieldset id="formFlower" [disabled]="true">
                           <div class="row mb-2">
                             <div class="col-md-3 my-auto">
-                              <label class="m-0">Tên thú cưng</label>
+                              <label class="m-0">Tên Hoa Lan</label>
                             </div>
                             <div class="col-md-9">
                               <input
@@ -276,7 +279,7 @@
                           </div>
                           <div class="row mb-2">
                             <div class="col-md-3 my-auto">
-                              <label class="m-0">Giống</label>
+                              <label class="m-0">Loại Lan</label>
                             </div>
                             <div class="col-md-9">
                               <input
@@ -284,22 +287,22 @@
                                 name="name"
                                 placeholder="giong"
                                 class="form-control"
-                                [value]="slide?.breed"
+                                [value]="slide?.category"
                               />
                             </div>
                           </div>
 
                           <div class="row mb-2">
                             <div class="col-md-3 my-auto">
-                              <label class="m-0">Ngày sinh</label>
+                              <label class="m-0">ngày đăng</label>
                             </div>
                             <div class="col-md-9">
                               <input
                                 type="text"
-                                name="birthdate"
-                                placeholder="birthdate"
+                                name="postingDate"
+                                placeholder="postingDate"
                                 class="form-control"
-                                [value]="slide?.birthdate | date: 'dd/MM/yyyy'"
+                                [value]="slide?.postingDate | date: 'dd/MM/yyyy'"
                               />
                             </div>
                           </div>
@@ -324,8 +327,8 @@
                           [src]="
                             slide?.picture_url || 'assets/img/avatar_pet.jpg'
                           "
-                          alt="image thú cưng"
-                          title="thông tin thú cưng"
+                          alt="image Hoa Lan"
+                          title="thông tin Hoa Lan"
                           onerror="this.src='assets/img/avatar_template.jpg';"
                         />
                       </div>
@@ -365,22 +368,22 @@
             role="tabpanel"
             aria-labelledby="add-tab"
           >
-            <div class="card--pets">
+            <div class="card--Flower">
               <div class="__card--profile m-0">
-                <fieldset id="formPetsAdd">
+                <fieldset id="formFlowerAdd">
                   <form
-                    (ngSubmit)="onSubmitPets(formPets.value)"
-                    [formGroup]="formPets"
+                    (ngSubmit)="onSubmitFlower(formFlower.value)"
+                    [formGroup]="formFlower"
                   >
                     <div class="row mb-2">
                       <div class="col-md-4 my-auto">
-                        <label class="m-0">Tên thú cưng</label>
+                        <label class="m-0">Tên Hoa Lan</label>
                       </div>
                       <div class="col-md-8">
                         <input
                           type="text"
                           name="name"
-                          placeholder="ten thu cung"
+                          placeholder="ten Hoa Lan"
                           formControlName="namePet"
                           class="form-control"
                         />
@@ -388,23 +391,27 @@
                     </div>
                     <div class="row mb-2">
                       <div class="col-md-4 my-auto">
-                        <label class="m-0">Giống</label>
+                        <label class="m-0">Loại Lan</label>
                       </div>
                       <div class="col-md-8">
                         <select
                           class="custom-select"
-                          id="breed"
-                          formControlName="breed"
+                          id="category"
+                          formControlName="category"
                         >
-                          <option selected value="Đực">Đực</option>
-                          <option value="Cái">Cái</option>
+                          <option selected value="Lan Vũ nữ">Lan Vũ nữ</option>
+                          <option value="Lan Dendro">Lan Dendro</option>
+                          <option value="Lan Chu Đinh">Lan Chu Đinh</option>
+                          <option value="Lan Cẩm cù">Lan Cẩm cù</option>
+                          <option value="Lan Long tu Lào">Lan Long tu Lào</option>
+                          <option value="Lan Hạc vỹ">Lan Hạc vỹ</option>
                         </select>
                       </div>
                     </div>
 
                     <div class="row mb-2">
                       <div class="col-md-4 my-auto">
-                        <label class="m-0">Ngày sinh</label>
+                        <label class="m-0">Ngày Đăng</label>
                       </div>
                       <div class="col-md-8">
                         <input
@@ -446,15 +453,15 @@
                             id="upload-photo"
                             accept=".png, .jpg, .jpeg"
                             enctype="multipart/form-data"
-                            (change)="onSelectFilePets($event)"
+                            (change)="onSelectFileFlower($event)"
                             formControlName="img"
                           />
                           <input
                             type="text"
                             name="upload-img"
                             class="form-control __custom"
-                            placeholder="chon hinh anh ma ban yeu thich nhat"
-                            value="{{ formPets.get('img').value }}"
+                            placeholder="chọn hình ảnh Hoa Lan của bạn"
+                            value="{{ formFlower.get('img').value }}"
                           />
                         </div>
                       </div>
@@ -463,7 +470,7 @@
                       <button
                         type="submit"
                         class="btn btn-success"
-                        [disabled]="formPets.invalid"
+                        [disabled]="formFlower.invalid"
                         *ngIf="isShow"
                       >
                         Thêm

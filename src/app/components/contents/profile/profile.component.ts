@@ -19,18 +19,19 @@ export class ProfileComponent implements OnInit, DoCheck {
   isShow = false;
 
   url;
-  urlPets;
+  urlFlower;
   img;
 
   isStatus;
-  arrPets = [];
+  isStatuss;
+  arrFlower = [];
 
   slidesStore = [
     {
       url: 'https://i.pinimg.com/564x/ac/26/8d/ac268d2334265637f8be3fb06e0fcff1.jpg',
       namePet: 'Lulu',
       color: 'trắng xám',
-      breed: 'husky',
+      category: 'husky',
       birthdate: '22/12/2012',
       id: '1',
       active: true,
@@ -39,7 +40,7 @@ export class ProfileComponent implements OnInit, DoCheck {
       url: 'https://i.pinimg.com/736x/95/a3/da/95a3da17973b16c830dc9ba06216673e.jpg',
       namePet: 'Lulu',
       color: 'trắng xám',
-      breed: 'husky',
+      category: 'husky',
       birthdate: '22/12/2012',
       id: '2',
       active: false,
@@ -48,7 +49,7 @@ export class ProfileComponent implements OnInit, DoCheck {
       url: '',
       namePet: 'Lulu',
       color: 'trắng xám',
-      breed: 'husky',
+      category: 'husky',
       birthdate: '22/12/2012',
       id: '3',
       active: false,
@@ -57,7 +58,7 @@ export class ProfileComponent implements OnInit, DoCheck {
       url: 'https://i.pinimg.com/736x/95/a3/da/95a3da17973b16c830dc9ba06216673e.jpg',
       namePet: 'Lulu',
       color: 'trắng xám',
-      breed: 'husky',
+      category: 'husky',
       birthdate: '22/12/2012',
       id: '4',
       active: false,
@@ -67,7 +68,7 @@ export class ProfileComponent implements OnInit, DoCheck {
   oldParamID;
   role;
   public formProfile: FormGroup;
-  public formPets: FormGroup;
+  public formFlower: FormGroup;
 
   constructor(
     private serviceHome: HomeService,
@@ -83,9 +84,9 @@ export class ProfileComponent implements OnInit, DoCheck {
     this.paramID = this.route.snapshot.paramMap.get('id');
 
     this.callProfile();
-    this.callPets();
+    this.callFlower();
     this.getDataProfile();
-    this.getDataListPets();
+    this.getDataListFlower();
     this.toTop();
   }
 
@@ -101,9 +102,9 @@ export class ProfileComponent implements OnInit, DoCheck {
       id: idUser,
       pet: idPet,
     };
-    if (confirm('Bạn đã chắc chắn xóa thông tin thú cưng này!')) {
+    if (confirm('Bạn đã chắc chắn xóa thông tin Hoa Lan này!')) {
       this.serviceHome.deletePet__ByID(data).subscribe((res) => {
-        this.getDataListPets();
+        this.getDataListFlower();
       });
     } else {
       return null;
@@ -155,24 +156,24 @@ export class ProfileComponent implements OnInit, DoCheck {
       (err) => {}
     );
   }
-  onSelectFilePets(event): void {
+  onSelectFileFlower(event): void {
     if (event.target.files && event.target.files[0]) {
-      this.urlPets = event.target.files[0] as File;
+      this.urlFlower = event.target.files[0] as File;
     }
   }
 
-  onSubmitPets(value): void {
+  onSubmitFlower(value): void {
     const data = new FormData();
-    data.append('profilePicture', this.urlPets);
+    data.append('profilePicture', this.urlFlower);
     data.append('id', this.idCurrent);
     data.append('namePet', value.namePet);
     data.append('color', value.color);
     data.append('birthdate', value.birthdate);
-    data.append('breed', value.breed);
-    this.serviceHome.createPets(data).subscribe(
+    data.append('category', value.category);
+    this.serviceHome.createFlower(data).subscribe(
       (req) => {
-        this.formPets.reset();
-        this.getDataListPets();
+        this.formFlower.reset();
+        this.getDataListFlower();
       },
       (err) => {}
     );
@@ -189,8 +190,8 @@ export class ProfileComponent implements OnInit, DoCheck {
       sex: [''],
     });
   }
-  callPets(): void {
-    this.formPets = this.form.group({
+  callFlower(): void {
+    this.formFlower = this.form.group({
       namePet: [
         '',
         Validators.compose([Validators.maxLength(150), Validators.required]),
@@ -201,7 +202,7 @@ export class ProfileComponent implements OnInit, DoCheck {
       ],
       birthdate: ['', Validators.required],
       img: ['', Validators.required],
-      breed: [
+      category: [
         '',
         Validators.compose([Validators.maxLength(150), Validators.required]),
       ],
@@ -233,8 +234,9 @@ export class ProfileComponent implements OnInit, DoCheck {
     };
     this.serviceHome.updateProfile(data).subscribe(
       (req) => {
-        this.isStatus = '';
+        this.isStatuss = 'Lưu thành công';
         this.getDataProfile();
+
       },
       (err) => {
         this.isStatus = err.error.error;
@@ -275,14 +277,14 @@ export class ProfileComponent implements OnInit, DoCheck {
     );
   }
 
-  getDataListPets(): void {
+  getDataListFlower(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.serviceHome.getDataListPets(id).subscribe(
+    this.serviceHome.getDataListFlower(id).subscribe(
       (data) => {
         if (data[0]) {
           data[0].active = true;
         }
-        this.arrPets = data;
+        this.arrFlower = data;
       },
       (err) => {}
     );

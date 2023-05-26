@@ -4,7 +4,7 @@
   "scripts": {
     "postinstall": "ngcc --properties es5 browser module main --first-only",
     "ng": "ng",
-    "start": "ng serve --o",
+    "start": "ng serve --port 8080 --host 0.0.0.0",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

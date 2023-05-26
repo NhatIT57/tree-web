@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PetsAiComponent } from './pets-ai.component';
+import { FlowerAiComponent } from './Flower-ai.component';
 
-describe('PetsAiComponent', () => {
-  let component: PetsAiComponent;
-  let fixture: ComponentFixture<PetsAiComponent>;
+describe('FlowerAiComponent', () => {
+  let component: FlowerAiComponent;
+  let fixture: ComponentFixture<FlowerAiComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PetsAiComponent ]
+      declarations: [ FlowerAiComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PetsAiComponent);
+    fixture = TestBed.createComponent(FlowerAiComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -10,10 +10,10 @@ import { OutletRightComponent } from './outlet-right/outlet-right.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ListCardComponent } from './contents/list-card/list-card.component';
-import { PetsAiComponent } from './contents/pets-ai/pets-ai.component';
 import { ContactComponent } from './contact/contact.component';
 import { ProfileComponent } from './contents/profile/profile.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { FlowerAiComponent } from './contents/Flower-ai/Flower-ai.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     OutletRightComponent,
     SafePipe,
     ListCardComponent,
-    PetsAiComponent,
+    FlowerAiComponent,
     ContactComponent,
     ProfileComponent,
   ],

@@ -57,7 +57,7 @@
         >
         <a
           class="nav-link"
-          routerLink="ai-for-pets"
+          routerLink="ai-for-Flower"
           routerLinkActive="active"
           (click)="removeActive()"
           >Tra cứu</a
@@ -86,7 +86,12 @@
           *ngIf="!tokenChecked"
           >Đăng nhập</a
         >
-        <div class="nav-link sign_out" *ngIf="tokenChecked">
+        <div
+          data-toggle="modal"
+          data-target="#loginModal"
+          class="nav-link sign_out"
+          *ngIf="tokenChecked"
+        >
           <a>Đăng xuất</a>
           <div class="_card">
             <div class="card_profile">
@@ -109,7 +114,8 @@
                 >
                   Đổi mật khẩu
                 </button>
-                <button class="btn btn-success" (click)="logout()">
+                <button  data-toggle="modal"
+                data-target="#loginModal" class="btn btn-success" (click)="logout()">
                   Đăng xuất
                 </button>
               </div>
