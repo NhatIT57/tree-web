@@ -15,6 +15,7 @@ import { ProfileComponent } from './contents/profile/profile.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { FlowerAiComponent } from './contents/Flower-ai/Flower-ai.component';
 
+
 @NgModule({
   declarations: [
     SignInComponent,
