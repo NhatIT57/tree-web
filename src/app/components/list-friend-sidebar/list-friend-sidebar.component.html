@@ -1,0 +1,24 @@
+<div class="ListFriend__Sidebar" *ngIf="userToken">
+  <button class="OpenFloat__Btn" type="primary" (click)="onChangeVisible()" *ngIf="!isVisibleChat">
+    <i class="fas fa-comment"></i>
+  </button>
+  <div class="ListFriend__Chat" *ngIf="isVisibleChat">
+    <div class="Action__Zone">
+      <div class="Title__Text">Những người bạn muốn nhắn tin</div>
+      <button class="RestoreDown__Btn" type="primary" (click)="onChangeVisible()" >
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+    <div class="ListFriend__Zone">
+      <div class="Friend__Data" *ngFor="let user of listUser, let i = index">
+        <div class="Friend__Avatar">
+          <img class="avatar__img" alt="user avatar" [src]="user.picture" onerror="this.src='assets/img/avatar_template.jpg';"/>
+        </div>
+        <div class="Friend__Name">{{ user.fullName }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ChatRoom__Zone" *ngFor="let user of listUser, let i = index">
+  <chat-room-component User="user" Index="i" [onCloseChat]="onCloseChat(i)"> </chat-room-component>
+</div>

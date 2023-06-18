@@ -5,6 +5,7 @@
     width: 100%;
     z-index: 9999;
   }
+
   .main-content {
     max-height: fit-content;
     min-height: calc(100vh - 115px);
@@ -14,10 +15,11 @@
     padding: 50px;
     justify-content: space-between;
 
-    & > div:first-child {
+    .rightSide {
       width: 71.4%;
     }
-    & > div:last-child {
+
+    .leftSide {
       // flex: auto;
       width: 25%;
       height: 500px;
@@ -57,7 +59,16 @@
       //   }
       // }
     }
+
+    .ListFriend__Menu {
+      position: fixed;
+      right: 0;
+      top: 115px;
+      z-index: 10000;
+      height: calc(100vh - 115px);
+    }
   }
+
   .main-footer {
     position: relative;
     z-index: 9;
@@ -68,28 +79,34 @@
       margin-top: 145px;
       padding-left: 0;
       padding-right: 0;
-      & > div:first-child {
+
+      .rightSide {
         width: 100%;
       }
-      & > div:last-child {
+
+      .leftSide {
         display: none;
       }
     }
   }
+
   @media (min-width: 740px) and (max-width: 1023px) {
     .main-content {
       margin-top: 145px;
-      & > div:first-child {
+
+      .rightSide {
         width: 100%;
       }
-      & > div:last-child {
+
+      .leftSide {
         display: none;
       }
     }
   }
+
   // @media (min-width: 1024px) and (max-width: 1366px) {
   //   .main-content {
-  //     & > div:last-child {
+  //    .leftSide {
   //       right: 4%;
   //     }
   //   }

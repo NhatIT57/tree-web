@@ -2,12 +2,15 @@
   <!-- (scroll)="scrolling($event)" -->
   <app-header class="main-header"></app-header>
   <div class="main-content">
-    <div>
+    <div class="rightSide">
       <router-outlet></router-outlet>
     </div>
-    <div>
+    <div class="leftSide">
       <app-outlet-right></app-outlet-right>
       <!-- [ngClass]="{ 'active-scroll': scroll }" -->
+    </div>
+    <div class="ListFriend__Menu">
+      <list-friend-sidebar></list-friend-sidebar>
     </div>
   </div>
   <app-footer class="main-footer"></app-footer>

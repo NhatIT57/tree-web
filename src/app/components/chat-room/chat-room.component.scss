@@ -1,0 +1,53 @@
+.Chat__Room {
+  height: 100%;
+  background-color: #D9D9D9;
+
+  .Chat__Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px 10px 20px;
+    background: #7A7A7A;
+
+    .Friend__Name {
+      font-size: 18px;
+    }
+
+    .CloseButton {
+      font-size: 18px;
+      background-color: unset;
+      color: #3b3b3b;
+    }
+  }
+
+  .Chat__Messages {
+    height: calc(100% - 85px);
+  }
+
+  .Chat__Input {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    .Input__Message {
+      width: calc(100% - 35px);
+      height: 35px;
+      border-radius: 7px;
+      padding: 0 10px;
+    }
+
+    .Send__Button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 35px;
+      width: 35px;
+      color: #3b3b3b;
+
+      &:hover {
+        background: #525252;
+        color: white;
+      }
+    }
+  }
+}

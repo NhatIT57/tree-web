@@ -79,4 +79,7 @@ export class HomeService {
   public deletePet__ByID(data): Observable<any> {
     return this.http.post<any>(`/deletepet`, data);
   }
+  public getListFriend(): Observable<any> {
+    return this.http.get<any>(`/listFriend`);
+  }
 }

@@ -1,0 +1,19 @@
+<div class="Chat__Room" *ngIf="User.isOpenChat">
+  <div class="Chat__Header">
+    <div class="Friend__Name">
+      Hưng Lê
+    </div>
+    <button class="CloseButton" type="primary" (click)="closeChat()">
+      <i class="fa fa-times"></i>
+    </button>
+  </div>
+  <div class="Chat__Messages">
+
+  </div>
+  <div class="Chat__Input">
+    <input class="Input__Message">
+    <button class="Send__Button" type="primary" (click)="onSendChat()">
+      <i class="fa fa-paper-plane"></i>
+    </button>
+  </div>
+</div>

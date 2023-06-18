@@ -1,0 +1,88 @@
+.ListFriend__Sidebar {
+  .OpenFloat__Btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 15px;
+    right: 0;
+    width: 55px;
+    height: 55px;
+    margin-top: 15px;
+    border-radius: 100%;
+    font-size: 25px;
+    color: #fff;
+    background-color: #5165FF;
+  }
+
+  .ListFriend__Chat {
+    width: 350px;
+    height: calc(100vh - 115px);
+    padding: 15px 20px;
+    background: rgba(149, 149, 149, 0.75);
+
+    .Action__Zone {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .Title__Text {
+        font-weight: 500;
+        font-size: 16px;
+      }
+
+      .RestoreDown__Btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 32px;
+        width: 32px;
+        border-radius: 100%;
+        background-color: unset;
+
+        &:hover {
+          background-color: beige;
+          color: #242424;
+        }
+      }
+    }
+
+    .ListFriend__Zone {
+      margin-top: 20px;
+
+      .Friend__Data {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 8px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #5f5f5f;
+        }
+
+        .Friend__Avatar {
+          .avatar__img {
+            height: 40px;
+            width: 40px;
+            border-radius: 100%;
+          }
+        }
+
+        .Friend__Name {
+          margin-left: 15px;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
+
+.ChatRoom__Zone {
+  position: absolute;
+  bottom: 0;
+  left: -300px;
+  width: 300px;
+  height: 380px;
+}

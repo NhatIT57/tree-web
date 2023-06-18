@@ -14,7 +14,8 @@ import { ContactComponent } from './contact/contact.component';
 import { ProfileComponent } from './contents/profile/profile.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { FlowerAiComponent } from './contents/Flower-ai/Flower-ai.component';
-
+import { ListFriendSideBarComponent } from './list-friend-sidebar/list-friend-sidebar.component';
+import { ChatRoomComponent } from './chat-room/chat-room.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,8 @@ import { FlowerAiComponent } from './contents/Flower-ai/Flower-ai.component';
     FlowerAiComponent,
     ContactComponent,
     ProfileComponent,
+    ListFriendSideBarComponent,
+    ChatRoomComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
@@ -44,6 +47,8 @@ import { FlowerAiComponent } from './contents/Flower-ai/Flower-ai.component';
     HeaderComponent,
     FooterComponent,
     OutletRightComponent,
+    ListFriendSideBarComponent,
+    ChatRoomComponent,
   ],
 })
-export class ComponentsModule {}
+export class ComponentsModule { }

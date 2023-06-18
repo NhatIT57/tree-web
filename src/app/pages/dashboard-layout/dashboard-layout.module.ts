@@ -15,4 +15,4 @@ import { CommonModule } from '@angular/common';
   ],
   exports: [FormsModule],
 })
-export class DashboardLayoutModule {}
+export class DashboardLayoutModule { }
