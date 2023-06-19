@@ -35,6 +35,11 @@ export class ListCardComponent implements OnInit {
     this.serviceHome.getAllListFlower().subscribe((res) => {
       if (res && res.Flower !== '') {
         this.dataListCard = res.trees.splice(a, b);
+        for (let index = 0; index < this.dataListCard.length; index++) {
+            if (this.dataListCard[index].picture) {
+              this.dataListCard[index].picture = this.http + "/" + this.dataListCard[index].picture;
+            }
+        }
         this.countListCard = res.count;
       }
     });

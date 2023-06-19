@@ -16,6 +16,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { FlowerAiComponent } from './contents/Flower-ai/Flower-ai.component';
 import { ListFriendSideBarComponent } from './list-friend-sidebar/list-friend-sidebar.component';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,13 @@ import { ChatRoomComponent } from './chat-room/chat-room.component';
     RouterModule,
     ReactiveFormsModule,
     CarouselModule,
+    MatAutocompleteModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
+    
   ],
   providers: [DatePipe],
   exports: [

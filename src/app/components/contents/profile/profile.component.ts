@@ -3,6 +3,7 @@ import { Component, DoCheck, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HomeService } from './../../../services/home.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profile',
@@ -70,24 +71,33 @@ export class ProfileComponent implements OnInit, DoCheck {
   public formProfile: FormGroup;
   public formFlower: FormGroup;
 
+  checkFriend: boolean = false;
+  textFriend: string = '';
+  textRejectFriend: string = 'Hủy lời mời kết bạn';
+  checkInvite: boolean = true;
   constructor(
     private serviceHome: HomeService,
     private form: FormBuilder,
     public datepipe: DatePipe,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
     this.idCurrent = localStorage.getItem('id');
     this.role = localStorage.getItem('role');
     this.paramID = this.route.snapshot.paramMap.get('id');
-
+    if (this.idCurrent != this.paramID) {
+      this.checkFriend = true;
+      this.textFriend = 'Kết bạn';
+    }
     this.callProfile();
     this.callFlower();
     this.getDataProfile();
     this.getDataListFlower();
     this.toTop();
+    this.getListInvite();
   }
 
   toTop(): void {
@@ -95,6 +105,46 @@ export class ProfileComponent implements OnInit, DoCheck {
       top: 0,
       behavior: 'smooth',
     });
+  }
+  rejectFriend() {
+    // const postBody = {
+    //   userId: this.paramID,
+    //   targetUserId: this.idCurrent,
+    // };
+    const postBody = {
+      userId: this.idCurrent,
+      targetUserId: this.paramID,
+    };
+    this.serviceHome.rejectFriend(postBody).subscribe((res) => {
+      this.toastr.success('Hủy lời mời kết bạn thành công !');
+      this.checkInvite = true;
+      this.textFriend = 'Kết bạn';
+    });
+  }
+  getListInvite() {
+    this.serviceHome.getListInvite(this.paramID).subscribe((res) => {
+      for (let index = 0; index < res.length; index++) {
+        if (res[index]._id == this.idCurrent) {
+          this.checkInvite = false;
+          this.textFriend = 'Đã gửi lời mời';
+        }
+      }
+    });
+  }
+
+  addFriendNew() {
+    const postBody = {
+      userId: this.idCurrent,
+      targetUserId: this.paramID,
+    };
+    if (this.checkInvite) {
+      this.serviceHome.addFriend(postBody).subscribe((res) => {
+        if (res.status) {
+          this.toastr.success('Gửi lời mời kết bạn thành công !');
+          this.getListInvite();
+        }
+      });
+    }
   }
 
   deletePet__ByID(idUser, idPet): void {
@@ -236,7 +286,6 @@ export class ProfileComponent implements OnInit, DoCheck {
       (req) => {
         this.isStatuss = 'Lưu thành công';
         this.getDataProfile();
-
       },
       (err) => {
         this.isStatus = err.error.error;

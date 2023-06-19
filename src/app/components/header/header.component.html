@@ -46,8 +46,23 @@
 
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="searchUser_container">
-        <mat-icon>search</mat-icon>
-        <input type="text" class="search__input" placeholder="Tìm kiếm người dùng...">
+        <mat-form-field class="example-full-width">
+          <input
+            type="text"
+            class="search__input form-control"
+            [ngModel]="fieldName"
+            (ngModelChange)="SubjectName.next($event)"
+            placeholder="Tìm kiếm người dùng..."
+            [matAutocomplete]="auto"
+          />
+          <mat-autocomplete #auto="matAutocomplete">
+            <div *ngIf="listUser.length > 0">
+              <mat-option *ngFor="let item of listUser" [value]="fullName" (click)="seenProfile(item)">
+                {{ item.fullName }}
+              </mat-option>
+            </div>
+          </mat-autocomplete>
+        </mat-form-field>
       </div>
       <div class="navbar-nav">
         <a class="nav-link" routerLink="home" routerLinkActive="active"
@@ -59,6 +74,13 @@
           routerLinkActive="active"
           (click)="removeActive()"
           >Bộ sưu tập</a
+        >
+        <a
+          class="nav-link"
+          routerLink="invite-Friend"
+          routerLinkActive="active"
+          (click)="removeActive()"
+          >Lời mời kết bạn</a
         >
         <a
           class="nav-link"
@@ -119,8 +141,12 @@
                 >
                   Đổi mật khẩu
                 </button>
-                <button  data-toggle="modal"
-                data-target="#loginModal" class="btn btn-success" (click)="logout()">
+                <button
+                  data-toggle="modal"
+                  data-target="#loginModal"
+                  class="btn btn-success"
+                  (click)="logout()"
+                >
                   Đăng xuất
                 </button>
               </div>

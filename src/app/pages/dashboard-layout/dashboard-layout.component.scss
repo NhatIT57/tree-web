@@ -62,10 +62,10 @@
 
     .ListFriend__Menu {
       position: fixed;
-      right: 0;
-      top: 115px;
+      right: 15px;
+      bottom: 10px;
       z-index: 10000;
-      height: calc(100vh - 115px);
+      // height: calc(100vh - 115px);
     }
   }
 

@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { ComponentsModule } from './components/components.module';
 import { HttpConfigInterceptor } from './interceptors/httpconfig.interceptors';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +18,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AppRoutingModule,
     HttpClientModule,
     NgxSpinnerModule,
-    FontAwesomeModule,
+    // FontAwesomeModule,
+   
   ],
   providers: [
     {
@@ -30,4 +30,4 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

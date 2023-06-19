@@ -28,7 +28,7 @@
         class="card__img"
         [ngStyle]="{
           'background-image':
-            'url(' + card?.picture_url + ')' ||
+            'url(' + card?.picture + ')' ||
             'url(assets/img/avatar_template.jpg)'
         }"
       ></div>
@@ -37,7 +37,7 @@
           class="card__img--hover"
           [ngStyle]="{
             'background-image':
-              'url(' + card?.picture_url+ ')' ||
+              'url(' + card?.picture+ ')' ||
               'url(assets/img/avatar_template.jpg)'
           }"
         ></div>

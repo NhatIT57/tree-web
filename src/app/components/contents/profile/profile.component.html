@@ -71,6 +71,28 @@
                 >Thêm Hoa Lan</a
               >
             </li>
+            <li class="nav-item" *ngIf="checkFriend">
+              <div
+                style="cursor: pointer;"
+                class="nav-link text-dark"
+                data-toggle="tab"
+                aria-controls="add"
+                aria-selected="false"
+                (click)="addFriendNew()"
+                >{{textFriend}}</div
+              >
+            </li>
+            <li class="nav-item" *ngIf="!checkInvite">
+              <div
+                style="cursor: pointer;"
+                class="nav-link text-dark"
+                data-toggle="tab"
+                aria-controls="add"
+                aria-selected="false"
+                (click)="rejectFriend()"
+                >{{textRejectFriend}}</div
+              >
+            </li>
           </ul>
         </div>
       </div>

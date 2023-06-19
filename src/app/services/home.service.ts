@@ -82,4 +82,17 @@ export class HomeService {
   public getListFriend(): Observable<any> {
     return this.http.get<any>(`/listFriend`);
   }
+  public searchUser( name): Observable<any> {
+    return this.http.get<any>(`/searchUserByName?username=${name}`);
+  }
+  
+  public addFriend( data): Observable<any> {
+    return this.http.post<any>(`/addFriend`, data);
+  }
+  public getListInvite(userId): Observable<any> {
+    return this.http.get<any>(`/listInvite?userId=${userId}`);
+  }
+  public rejectFriend(data): Observable<any> {
+    return this.http.post<any>(`/rejectFriend`,data);
+  }
 }
