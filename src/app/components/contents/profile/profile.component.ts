@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HomeService } from './../../../services/home.service';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -121,6 +122,7 @@ export class ProfileComponent implements OnInit, DoCheck {
       this.textFriend = 'Kết bạn';
     });
   }
+  
   getListInvite() {
     this.serviceHome.getListInvite(this.paramID).subscribe((res) => {
       for (let index = 0; index < res.length; index++) {
@@ -293,13 +295,17 @@ export class ProfileComponent implements OnInit, DoCheck {
     );
   }
 
+  public http = environment.apiUrl;
+
   getDataProfile(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.serviceHome.getDataProfile(id).subscribe(
       (data) => {
         if (data) {
           this.dataProfile = data[0];
-
+          if (this.dataProfile.picture) {
+            this.dataProfile.picture = this.http + "/" + this.dataProfile.picture;
+          }
           this.formProfile.patchValue({
             userID: this.dataProfile?.id,
             name: this.dataProfile?.fullName,
@@ -319,7 +325,7 @@ export class ProfileComponent implements OnInit, DoCheck {
           } else {
             this.isShow = false;
           }
-          localStorage.setItem('avatar', this.dataProfile?.picture_url);
+          localStorage.setItem('avatar', this.dataProfile?.picture);
         }
       },
       (err) => {}

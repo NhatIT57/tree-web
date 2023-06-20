@@ -16,8 +16,10 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { FlowerAiComponent } from './contents/Flower-ai/Flower-ai.component';
 import { ListFriendSideBarComponent } from './list-friend-sidebar/list-friend-sidebar.component';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ToastrModule } from 'ngx-toastr';
+import { InviteFriendComponent } from './contents/invite-friend/invite-friend.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { ToastrModule } from 'ngx-toastr';
     ProfileComponent,
     ListFriendSideBarComponent,
     ChatRoomComponent,
+    InviteFriendComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
@@ -43,12 +46,12 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     CarouselModule,
     MatAutocompleteModule,
+    MatButtonModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
-    
   ],
   providers: [DatePipe],
   exports: [
@@ -60,4 +63,4 @@ import { ToastrModule } from 'ngx-toastr';
     ChatRoomComponent,
   ],
 })
-export class ComponentsModule { }
+export class ComponentsModule {}

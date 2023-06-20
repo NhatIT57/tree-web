@@ -1,0 +1,29 @@
+<div class="invite__container">
+  <div class="notication__container">
+    <div class="title">Danh sách lời mời kết bạn</div>
+    <div class="list_invite">
+      <ng-container *ngFor="let list of listInvite">
+        <div class="userInvite__container">
+          <div routerLink="/profile/{{ list?._id }}" class="avatar">
+            <img src="{{ list.picture }}" alt="" />
+          </div>
+
+          <div routerLink="/profile/{{ list?._id }}" class="username">
+            {{ list.fullName }}
+          </div>
+          <div class="action">
+            <div mat-raised-button color="accent" class="access__Friend" (click)="accesFriend(list)">
+              Xác nhận
+            </div>
+            <div mat-raised-button class="unAccess__Friend" (click)="unAccesFriend(list)">Hủy lời mời</div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="listInvite.length == 0">
+        <div class="no__inviteFriend">
+            Không có lời mời kết bạn nào...
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
