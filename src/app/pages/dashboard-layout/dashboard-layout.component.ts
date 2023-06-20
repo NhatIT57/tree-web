@@ -7,10 +7,19 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 })
 export class DashboardLayoutComponent implements OnInit, OnDestroy {
   scroll;
-
-  constructor() {}
+  tokenChecked;
+  constructor() {
+    this.tokenChecked = localStorage.getItem('token');
+    
+  }
 
   ngOnInit(): void {
+    if (this.tokenChecked) {
+      document.querySelector('#rightSide').classList.add('hidden_rightSide');
+      document.querySelector('#main-content').classList.add('main-content-center');
+    } else {
+      document.querySelector('#container').classList.remove('right-panel-active');
+    }
     // window.addEventListener('scroll', this.scrolling, true);
   }
   // scrolling = (s) => {

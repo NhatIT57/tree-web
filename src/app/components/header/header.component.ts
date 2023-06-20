@@ -90,7 +90,8 @@ export class HeaderComponent implements OnInit, DoCheck {
     localStorage.removeItem('id');
     localStorage.removeItem('avatar');
     localStorage.clear();
-    this.router.navigate(['/home']);
+    // this.router.navigate(['/home']);
+    window.location.href= '/home';
   }
 
   // tslint:disable-next-line:typedef

@@ -92,7 +92,8 @@ export class SignInComponent implements OnInit, OnChanges {
         document.querySelector('.over').classList.remove('overlay');
         document.querySelector('.modal-backdrop').remove();
         //#endregion
-        this.router.navigateByUrl(`profile/${data.id}`);
+        window.location.href= `profile/${data.id}`;
+        // this.router.navigateByUrl(`profile/${data.id}`);
       })
       .catch((error) => {
         document.querySelector('.showErrorLogin').innerHTML = error.error.Error;

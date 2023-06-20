@@ -9,10 +9,12 @@ import { environment } from '../../../environments/environment';
 })
 export class OutletRightComponent implements OnInit {
   public http = environment.apiUrl;
-
+  tokenChecked;
   public dataProfile;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.tokenChecked = localStorage.getItem('token');
+  }
 }

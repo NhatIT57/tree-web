@@ -15,10 +15,9 @@ export class ListFriendSideBarComponent implements OnInit {
   public imgPath = './user-avatar.jpg';
   public listUser: any[] = [];
   public userToken: string = null;
-
-  constructor(
-    private serviceHome: HomeService
-  ) {
+  idCurrent;
+  constructor(private serviceHome: HomeService) {
+    this.idCurrent = localStorage.getItem('id');
     this.userToken = localStorage.getItem('token');
   }
 
@@ -28,28 +27,28 @@ export class ListFriendSideBarComponent implements OnInit {
 
   onChangeVisible = () => {
     this.isVisibleChat = !this.isVisibleChat;
-  }
+  };
 
   onOpenChat = (index) => {
     this.listUser[index].isOpenChat = true;
-  }
+  };
 
   onCloseChat = (index) => {
     this.listUser[index].isOpenChat = false;
-  }
+  };
 
   onCallAPIGetListFriend = () => {
-    this.serviceHome.getListFriend().subscribe(
+    this.serviceHome.getListFriend(this.idCurrent).subscribe(
       (data) => {
-        console.log("🚀 ~:", data)
+        console.log('🚀 ~:', data);
         if (data) {
           const newData = data;
-          newData.map(user => user["isOpenChat"] = false);
+          newData.map((user) => (user['isOpenChat'] = false));
           this.listUser = newData;
-          console.log("🚀 ", this.listUser, newData)
+          console.log('🚀 ', this.listUser, newData);
         }
       },
-      (err) => { }
+      (err) => {}
     );
-  }
+  };
 }

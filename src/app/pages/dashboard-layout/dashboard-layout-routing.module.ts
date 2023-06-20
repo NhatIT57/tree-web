@@ -8,6 +8,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardLayoutComponent } from './dashboard-layout.component';
 import { HomeComponent } from '../../components/contents/home/home.component';
 import { FlowerAiComponent } from '../../components/contents/Flower-ai/Flower-ai.component';
+import { InviteFriendComponent } from '../../components/contents/invite-friend/invite-friend.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
     children: [
       { path: 'home', component: HomeComponent },
       { path: 'list-card', component: ListCardComponent },
+      { path: 'invite-Friend', component: InviteFriendComponent },
       { path: 'ai-for-Flower', component: FlowerAiComponent },
       { path: 'contact', component: ContactComponent },
       { path: 'profile/:id', component: ProfileComponent },

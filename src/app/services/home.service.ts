@@ -6,9 +6,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class HomeService {
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private http: HttpClient) {}
 
   public getPageHome(IdDistrict, page): Observable<any> {
     return this.http.get<any>(`/home/HomePage/${IdDistrict}/${page}`);
@@ -79,20 +77,23 @@ export class HomeService {
   public deletePet__ByID(data): Observable<any> {
     return this.http.post<any>(`/deletepet`, data);
   }
-  public getListFriend(): Observable<any> {
-    return this.http.get<any>(`/listFriend`);
+  public getListFriend(userId): Observable<any> {
+    return this.http.get<any>(`/listFriend?userId=${userId}`);
   }
-  public searchUser( name): Observable<any> {
+  public searchUser(name): Observable<any> {
     return this.http.get<any>(`/searchUserByName?username=${name}`);
   }
-  
-  public addFriend( data): Observable<any> {
+
+  public addFriend(data): Observable<any> {
     return this.http.post<any>(`/addFriend`, data);
   }
   public getListInvite(userId): Observable<any> {
     return this.http.get<any>(`/listInvite?userId=${userId}`);
   }
   public rejectFriend(data): Observable<any> {
-    return this.http.post<any>(`/rejectFriend`,data);
+    return this.http.post<any>(`/rejectFriend`, data);
+  }
+  public acceptFriend(data): Observable<any> {
+    return this.http.post<any>(`/acceptFriend`, data);
   }
 }

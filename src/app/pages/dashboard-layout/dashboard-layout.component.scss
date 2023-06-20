@@ -5,10 +5,13 @@
     width: 100%;
     z-index: 9999;
   }
+  .main-content-center {
+    justify-content: center !important;
+  }
 
   .main-content {
     max-height: fit-content;
-    min-height: calc(100vh - 115px);
+    min-height: calc(100vh - 310px);
     margin-top: 115px;
 
     display: flex;
@@ -16,48 +19,29 @@
     justify-content: space-between;
 
     .rightSide {
-      width: 71.4%;
+      width: 25%;
+      height: 500px;
+      position: relative;
+    }
+    .hidden_rightSide {
+      display: none;
     }
 
     .leftSide {
-      // flex: auto;
-      width: 25%;
-      height: 500px;
-      // margin-left: 50px;
-      position: relative;
-
-      // width: 300px;
-      // height: 488px;
-      // position: fixed;
-      // right: 16.6%;
-
-      // app-outlet-right {
-      //   // transition: 1s all;
-
-      //   // position: fixed;
-      //   // width: calc(100vw - 77vw);
-      //   // height: 65.5vh;
-      // }
-      // .active-scroll {
-      //   height: 165px;
-      //   &::ng-deep {
-      //     .gradient {
-      //       .content {
-      //         padding: 11px 7px;
-      //         h5 {
-      //           display: none;
-      //         }
-      //         .details {
-      //           display: none;
-      //         }
-      //       }
-      //       .icons {
-      //         top: 0;
-      //         right: 7px;
-      //       }
-      //     }
-      //   }
-      // }
+      width: 71.4%;
+      .main__content {
+        padding: 50px;
+        .title__content {
+          font-size: 42px;
+          font-weight: 600;
+          padding-bottom: 25px;
+        }
+        .contents {
+          font-size: 20px;
+          font-weight: 400;
+          line-height: 135%;
+        }
+      }
     }
 
     .ListFriend__Menu {
