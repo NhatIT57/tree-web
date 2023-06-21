@@ -74,21 +74,26 @@
     margin: 10px 0 22px;
     background-color: var(--backgroud-color-button);
     border-radius: 17px;
-    box-shadow: 0px 17px 12px -7px rgb(0 0 0 / 50%);
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, .9), 0px 1px 1px 0px rgba(0, 0, 0, .14), 0px 1px 3px 0px rgba(0, 0, 0, .8);
+    border: 0px solid black;
     position: relative;
-  
+
     .__image {
       // border-radius: 7px 7px 0 0;
       width: 100%;
       height: 350px;
+      padding-top: 5px;
       // background-color: var(--backgroud-color-button);
       img {
+        // box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, .9), 0px 1px 1px 0px rgba(0, 0, 0, .14), 0px 1px 3px 0px rgba(0, 0, 0, .8);
         width: 100%;
         height: 100%;
         object-fit: contain;
       }
     }
     & > .__content {
+      border-radius: 15px 15px 0 0;
+      box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.1), 0px 1px 1px 0px rgba(0, 0, 0, 0.2), 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
       background-color: var(--backgroud-color-body);
       // border-radius: 7px 7px 0 0;
       padding: 10px 20px;
@@ -101,6 +106,7 @@
         h3,
         p {
           margin: 0;
+        color: black;
           padding: 0 16px;
         }
 
@@ -131,7 +137,7 @@
         transition: 0.5 all;
         &:hover {
           background: var(--backgroud-color-button);
-          color: var(--text-color);
+          // color: var(--text-color);
         }
       }
     }
@@ -141,7 +147,17 @@
       padding: 10px 20px;
       background: var(--backgroud-color-button);
       border-radius: 0px 0px 17px 17px;
+      .container__title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .title__comment {
+          font-size: 16px;
+          font-weight: 410;
+          padding: 10px 0;
+        }
 
+      }
       .__cmt {
         position: relative;
         padding: 7px 0;
@@ -162,12 +178,14 @@
       }
       p {
         margin-left: 55px;
+        font-size: 16px;
         margin-bottom: 0;
       }
       .__info--cmt {
         margin-left: 55px;
         line-height: 1;
         margin-bottom: 7px;
+        font-size: 18px;
         color: black;
         h6 {
           font-weight: 600;
@@ -177,15 +195,18 @@
     }
     .form-comment {
       padding: 0 20px;
-      background-color: var(--backgroud-color-logo);
+      // background-color: var(--backgroud-color-logo);
 
       .form-row {
         position: relative;
+        .text__area {
+          margin-bottom:  unset !important;
+        }
       }
       .btn-cmt {
         position: absolute;
         right: 10px;
-        bottom: 20px;
+        bottom: 5px;
         width: 70px;
         height: 35px;
         box-shadow: none;
@@ -243,6 +264,8 @@
   }
 }
 .__fullName {
+  color: black;
+  font-size: 16px;
   &:hover {
     text-decoration: underline;
   }

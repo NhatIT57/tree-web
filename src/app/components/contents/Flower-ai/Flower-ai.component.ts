@@ -8,13 +8,14 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./Flower-ai.component.scss'],
 })
 export class FlowerAiComponent implements OnInit, OnDestroy {
-  url = 'https://teachablemachine.withgoogle.com/models/RLSIInxw_/';
+  url = 'https://teachablemachine.withgoogle.com/models/je9QtZdtp/';
   model;
   predictions;
   webcam;
   maxPredictions;
   labelContainer;
   isShow = true;
+  flowerName = "";
   constructor(private spinner: NgxSpinnerService) {}
 
   ngOnInit(): void {
@@ -53,13 +54,9 @@ export class FlowerAiComponent implements OnInit, OnDestroy {
     await this.spinner.hide();
 
     document.getElementById('webcam-container').appendChild(this.webcam.canvas);
-    this.labelContainer = document.getElementById('label-container');
-    // for (let i = 0; i < this.maxPredictions; i++) {
-    //   // and class labels
-    //   this.labelContainer.appendChild(document.createElement("div"));
-    // }
+    // this.labelContainer = document.getElementById('label-container');
+
   }
-  // tslint:disable-next-line:typedef
   async loop() {
     this.webcam.update();
     await this.predict();
@@ -68,12 +65,8 @@ export class FlowerAiComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:typedef
   async predict() {
     const predictions = await this.model.predictTopK(this.webcam.canvas, 1);
-    this.labelContainer.innerText = predictions[0].className;
-    // for (let i = 0; i < this.maxPredictions; i++) {
-    //   const classPrediction =
-    //     prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-    //   this.labelContainer.childNodes[i].innerHTML = classPrediction;
-    // }
+    this.flowerName = predictions[0].className;
+    // this.labelContainer.innerText = predictions[0].className;
   }
   // tslint:disable-next-line:typedef
   async aiFlowerClose() {
