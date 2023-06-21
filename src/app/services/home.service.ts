@@ -96,4 +96,18 @@ export class HomeService {
   public acceptFriend(data): Observable<any> {
     return this.http.post<any>(`/acceptFriend`, data);
   }
+  public getHistoryMess(userId, targetUserId): Observable<any> {
+    return this.http.get<any>(
+      `/historyMess?userId=${userId}&targetUserId=${targetUserId}`
+    );
+  }
+  public getNewMess(userId, targetUserId): Observable<any> {
+    return this.http.get<any>(
+      `/newMess?userId=${userId}&targetUserId=${targetUserId}`
+    );
+  }
+
+  public createMess(data): Observable<any> {
+    return this.http.post<any>(`/createMess`, data);
+  }
 }

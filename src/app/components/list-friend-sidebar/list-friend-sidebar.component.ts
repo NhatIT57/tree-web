@@ -17,9 +17,15 @@ export class ListFriendSideBarComponent implements OnInit {
   public imgPath = './user-avatar.jpg';
   public listUser: any[] = [];
   public userToken: string = null;
+  listMess: any[] = [];
+
   idCurrent;
+  textMess = '';
+  avatarUser;
+  mesInterval;
   constructor(private serviceHome: HomeService) {
     this.idCurrent = localStorage.getItem('id');
+    this.avatarUser = localStorage.getItem('avatar');
     this.userToken = localStorage.getItem('token');
   }
 
@@ -31,16 +37,29 @@ export class ListFriendSideBarComponent implements OnInit {
     this.isVisibleChat = !this.isVisibleChat;
   };
 
-  onOpenChat = (index) => {
+  onOpenChat = (index, user) => {
     this.listUser[index].isOpenChat = true;
+    const params = {
+      userId: this.idCurrent,
+      targetUserId: user._id,
+    };
+    this.mesInterval = setInterval(() => {
+      this.callHistoryMess(params, index);
+    }, 3000);
   };
 
   onCloseChat = (index) => {
     this.listUser[index].isOpenChat = false;
+    clearInterval(this.mesInterval);
   };
 
-  onSendChat = () => {
-    console.log('send chat');
+  onSendChat = (user) => {
+    const postBody = {
+      userId: this.idCurrent,
+      targetUserId: user._id,
+      content: this.textMess,
+    };
+    this.callCreateMess(postBody);
   };
 
   onCallAPIGetListFriend = () => {
@@ -48,16 +67,37 @@ export class ListFriendSideBarComponent implements OnInit {
       (data) => {
         if (data) {
           const newData = data;
-          newData.map((user) => (user['isOpenChat'] = false));
-          for (let index = 0; index < newData.length; index++) {
-            if (newData[index].picture) {
-              newData[index].picture = this.http + '/' + newData[index].picture;
-            }
-          }
+          newData.map((user) => {
+            user['isOpenChat'] = false;
+            if (user.picture) user.picture = this.http + '/' + user.picture;
+          });
           this.listUser = newData;
         }
       },
       (err) => {}
     );
   };
+
+  callHistoryMess(params, index) {
+    this.serviceHome
+      .getHistoryMess(params.userId, params.targetUserId)
+      .subscribe((res) => {
+        this.listMess[`${index}`] = res.reverse();
+        console.log(this.listMess);
+      });
+  }
+
+  callCreateMess(dataBody) {
+    this.serviceHome.createMess(dataBody).subscribe((res) => {
+      if (res) {
+        this.textMess = '';
+      }
+    });
+  }
+
+  callNewMess(params) {
+    this.serviceHome
+      .getNewMess(params.userId, params.targetUserId)
+      .subscribe((res) => {});
+  }
 }

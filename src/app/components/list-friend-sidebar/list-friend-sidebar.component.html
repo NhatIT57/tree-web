@@ -9,10 +9,37 @@
               <i class="fa fa-times"></i>
             </button>
           </div>
-          <div class="Chat__Messages"></div>
+          <div class="Chat__Messages">
+            <ng-container *ngFor="let mess of listMess[i]">
+              <ng-container *ngIf="user.id == mess.user">
+                <div class="receiver__container">
+                  <div class="avatar__container">
+                    <img src="{{user.picture}}" alt="" class="avatar__receiver" />
+                  </div>
+                  <div class="messenger__receiver">{{ mess.content }}</div>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="idCurrent == mess.user">
+                <div class="sender__container">
+                  <div class="messenger__sender">{{ mess.content }}</div>
+                  <div class="avatar__container">
+                    <img src="{{avatarUser}}" alt="" class="avatar__sender" />
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
           <div class="Chat__Input">
-            <input class="Input__Message" />
-            <button class="Send__Button" type="primary" (click)="onSendChat()">
+            <input
+              class="Input__Message"
+              [(ngModel)]="textMess"
+              placeholder="Nhập nội dung để chat,..."
+            />
+            <button
+              class="Send__Button"
+              type="primary"
+              (click)="onSendChat(user)"
+            >
               <i class="fa fa-paper-plane"></i>
             </button>
           </div>
@@ -42,7 +69,7 @@
       </div>
       <div class="ListFriend__Zone">
         <div class="Friend__Data" *ngFor="let user of listUser; let i = index">
-          <div class="Friend_click" (click)="onOpenChat(i)">
+          <div class="Friend_click" (click)="onOpenChat(i, user)">
             <div class="Friend__Avatar">
               <img
                 class="avatar__img"
