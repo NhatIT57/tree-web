@@ -92,13 +92,16 @@
             >Lời mời kết bạn</a
           >
         </ng-container>
-        <a
-          class="nav-link"
-          routerLink="ai-for-Flower"
-          routerLinkActive="active"
-          (click)="removeActive()"
-          >Tra cứu</a
-        >
+        <ng-container *ngIf="tokenChecked">
+          <a
+            class="nav-link"
+            routerLink="ai-for-Flower"
+            routerLinkActive="active"
+            (click)="removeActive()"
+            >Tra cứu</a
+          >
+        </ng-container>
+
         <!-- <a
           class="nav-link"
           routerLink="contact"

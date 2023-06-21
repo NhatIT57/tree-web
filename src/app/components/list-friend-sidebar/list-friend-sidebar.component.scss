@@ -1,88 +1,154 @@
-.ListFriend__Sidebar {
-  .OpenFloat__Btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    top: 15px;
-    right: 0;
-    width: 55px;
-    height: 55px;
-    margin-top: 15px;
-    border-radius: 100%;
-    font-size: 25px;
-    color: #fff;
-    background-color: #5165FF;
+.ListFriend__container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: end;
+  width: 1165px;
+  .ListFriend__Sidebar {
+    // position: absolute;
+    // right: 0px;
+    // bottom: 0px;
+    // z-index: 999;
+    .OpenFloat__Btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      top: 15px;
+      right: 0;
+      width: 55px;
+      height: 55px;
+      margin-top: 15px;
+      border-radius: 100%;
+      font-size: 25px;
+      color: #fff;
+      background-color: #5165ff;
+    }
+
+    .ListFriend__Chat {
+      width: 350px;
+      height: calc(100vh - 115px);
+      padding: 15px 20px;
+      background: rgba(149, 149, 149, 0.75);
+
+      .Action__Zone {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .Title__Text {
+          font-weight: 500;
+          font-size: 16px;
+        }
+
+        .RestoreDown__Btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 32px;
+          width: 32px;
+          border-radius: 100%;
+          background-color: unset;
+
+          &:hover {
+            background-color: beige;
+            color: #242424;
+          }
+        }
+      }
+
+      .ListFriend__Zone {
+        margin-top: 20px;
+
+        .Friend__Data {
+          cursor: pointer;
+          .Friend_click {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            &:hover {
+              background-color: #5f5f5f;
+            }
+            .Friend__Avatar {
+              .avatar__img {
+                height: 40px;
+                width: 40px;
+                border-radius: 100%;
+              }
+            }
+
+            .Friend__Name {
+              margin-left: 15px;
+              font-size: 20px;
+            }
+          }
+        }
+      }
+    }
   }
 
-  .ListFriend__Chat {
-    width: 350px;
-    height: calc(100vh - 115px);
-    padding: 15px 20px;
-    background: rgba(149, 149, 149, 0.75);
+  .ChatRoom__Zone {
+    display: flex;
+    // position: absolute;
+    // bottom: 0;
+    // left: -300px;
+    height: 380px;
+  }
 
-    .Action__Zone {
+  .Chat__Room {
+    height: 100%;
+    margin-right: 25px;
+    width: 300px;
+    background-color: #d9d9d9;
+
+    .Chat__Header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 10px 10px 10px 20px;
+      background: #7a7a7a;
 
-      .Title__Text {
-        font-weight: 500;
-        font-size: 16px;
+      .Friend__Name {
+        font-size: 18px;
       }
 
-      .RestoreDown__Btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 32px;
-        width: 32px;
-        border-radius: 100%;
+      .CloseButton {
+        font-size: 18px;
         background-color: unset;
-
-        &:hover {
-          background-color: beige;
-          color: #242424;
-        }
+        color: #3b3b3b;
       }
     }
 
-    .ListFriend__Zone {
-      margin-top: 20px;
+    .Chat__Messages {
+      height: calc(100% - 85px);
+    }
 
-      .Friend__Data {
+    .Chat__Input {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      .Input__Message {
+        width: calc(100% - 35px);
+        height: 35px;
+        border-radius: 7px;
+        padding: 0 10px;
+      }
+
+      .Send__Button {
         display: flex;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
-        margin-top: 10px;
-        padding: 10px;
-        border-radius: 8px;
-        cursor: pointer;
+        height: 35px;
+        width: 35px;
+        color: #3b3b3b;
 
         &:hover {
-          background-color: #5f5f5f;
-        }
-
-        .Friend__Avatar {
-          .avatar__img {
-            height: 40px;
-            width: 40px;
-            border-radius: 100%;
-          }
-        }
-
-        .Friend__Name {
-          margin-left: 15px;
-          font-size: 20px;
+          background: #525252;
+          color: white;
         }
       }
     }
   }
-}
-
-.ChatRoom__Zone {
-  position: absolute;
-  bottom: 0;
-  left: -300px;
-  width: 300px;
-  height: 380px;
 }

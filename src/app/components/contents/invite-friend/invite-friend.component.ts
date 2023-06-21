@@ -31,7 +31,6 @@ export class InviteFriendComponent implements OnInit {
             this.http + '/' + this.listInvite[index].picture;
         }
       }
-      console.log(this.listInvite);
     });
   }
 
