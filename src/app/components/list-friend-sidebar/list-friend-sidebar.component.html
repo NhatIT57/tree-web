@@ -32,13 +32,13 @@
           <div class="Chat__Input">
             <input
               class="Input__Message"
-              [(ngModel)]="textMess"
+              [(ngModel)]="textMess[i]"
               placeholder="Nhập nội dung để chat,..."
             />
             <button
               class="Send__Button"
               type="primary"
-              (click)="onSendChat(user)"
+              (click)="onSendChat(user, i)"
             >
               <i class="fa fa-paper-plane"></i>
             </button>

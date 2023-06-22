@@ -93,6 +93,17 @@
                 >{{textRejectFriend}}</div
               >
             </li>
+            <li class="nav-item" *ngIf="checkCancelFriend">
+              <div
+                style="cursor: pointer;"
+                class="nav-link text-dark"
+                data-toggle="tab"
+                aria-controls="add"
+                aria-selected="false"
+                (click)="delFriend()"
+                >Xóa kết bạn</div
+              >
+            </li>
           </ul>
         </div>
       </div>
@@ -347,7 +358,7 @@
                       <div class="__card--img">
                         <img
                           [src]="
-                            slide?.picture_url || 'assets/img/avatar_pet.jpg'
+                            slide?.picture || 'assets/img/avatar_pet.jpg'
                           "
                           alt="image Hoa Lan"
                           title="thông tin Hoa Lan"

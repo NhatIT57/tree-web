@@ -20,7 +20,7 @@ export class ListFriendSideBarComponent implements OnInit {
   listMess: any[] = [];
 
   idCurrent;
-  textMess = '';
+  textMess = [];
   avatarUser;
   mesInterval;
   constructor(private serviceHome: HomeService) {
@@ -43,6 +43,7 @@ export class ListFriendSideBarComponent implements OnInit {
       userId: this.idCurrent,
       targetUserId: user._id,
     };
+    this.callHistoryMess(params, index);
     this.mesInterval = setInterval(() => {
       this.callHistoryMess(params, index);
     }, 3000);
@@ -53,13 +54,13 @@ export class ListFriendSideBarComponent implements OnInit {
     clearInterval(this.mesInterval);
   };
 
-  onSendChat = (user) => {
+  onSendChat = (user, index) => {
     const postBody = {
       userId: this.idCurrent,
       targetUserId: user._id,
-      content: this.textMess,
+      content: this.textMess[index],
     };
-    this.callCreateMess(postBody);
+    this.callCreateMess(postBody, index);
   };
 
   onCallAPIGetListFriend = () => {
@@ -83,14 +84,13 @@ export class ListFriendSideBarComponent implements OnInit {
       .getHistoryMess(params.userId, params.targetUserId)
       .subscribe((res) => {
         this.listMess[`${index}`] = res.reverse();
-        console.log(this.listMess);
       });
   }
 
-  callCreateMess(dataBody) {
+  callCreateMess(dataBody, index) {
     this.serviceHome.createMess(dataBody).subscribe((res) => {
       if (res) {
-        this.textMess = '';
+        this.textMess[index] = '';
       }
     });
   }

@@ -76,6 +76,7 @@ export class ProfileComponent implements OnInit, DoCheck {
   textFriend: string = '';
   textRejectFriend: string = 'Hủy lời mời kết bạn';
   checkInvite: boolean = true;
+  checkCancelFriend: boolean = false;
   constructor(
     private serviceHome: HomeService,
     private form: FormBuilder,
@@ -89,16 +90,17 @@ export class ProfileComponent implements OnInit, DoCheck {
     this.idCurrent = localStorage.getItem('id');
     this.role = localStorage.getItem('role');
     this.paramID = this.route.snapshot.paramMap.get('id');
-    if (this.idCurrent != this.paramID) {
-      this.checkFriend = true;
-      this.textFriend = 'Kết bạn';
-    }
+    // if (this.idCurrent != this.paramID) {
+    //   this.checkFriend = true;
+    //   this.textFriend = 'Kết bạn';
+    // }
     this.callProfile();
     this.callFlower();
     this.getDataProfile();
     this.getDataListFlower();
     this.toTop();
-    this.getListInvite();
+
+    this.callListFriend();
   }
 
   toTop(): void {
@@ -108,10 +110,6 @@ export class ProfileComponent implements OnInit, DoCheck {
     });
   }
   rejectFriend() {
-    // const postBody = {
-    //   userId: this.paramID,
-    //   targetUserId: this.idCurrent,
-    // };
     const postBody = {
       userId: this.idCurrent,
       targetUserId: this.paramID,
@@ -122,7 +120,23 @@ export class ProfileComponent implements OnInit, DoCheck {
       this.textFriend = 'Kết bạn';
     });
   }
-  
+
+
+  callListFriend () {
+    this.serviceHome.getListFriend(this.idCurrent).subscribe((res) => {
+      if (res) {
+        for (let index = 0; index < res.length; index++) {
+            if (res.id == this.paramID) {
+              this.checkCancelFriend = true;
+              this.textFriend = 'Đã kết bạn';
+            } else {
+              // this.getListInvite();
+            }
+        }
+      }
+    });
+  }
+
   getListInvite() {
     this.serviceHome.getListInvite(this.paramID).subscribe((res) => {
       for (let index = 0; index < res.length; index++) {
@@ -340,8 +354,15 @@ export class ProfileComponent implements OnInit, DoCheck {
           data[0].active = true;
         }
         this.arrFlower = data;
+        this.arrFlower.map (el => {
+          if (el.picture) {
+            el.picture = this.http + "/" + el.picture;
+          }
+        })
       },
       (err) => {}
     );
   }
+
+
 }

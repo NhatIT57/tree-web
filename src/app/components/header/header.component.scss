@@ -110,6 +110,9 @@
         display: block;
       }
     }
+    &.sign__disable {
+      pointer-events: none;
+    }
   }
   .card_profile {
     background-color: #222831;
@@ -159,6 +162,10 @@
         background-color: var(--backgroud-color-light);
       }
     }
+  }
+
+  .login__disable, .login__container {
+    pointer-events: none;
   }
 
   @media (max-width: 739px) {

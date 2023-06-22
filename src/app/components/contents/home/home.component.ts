@@ -165,7 +165,11 @@ export class HomeComponent implements OnInit, DoCheck {
       (res) => {
         if (res && res.posts !== '') {
           this.listPost = res.posts.splice(this.start, this.numb);
-
+          this.listPost.map(el => {
+            if (el.picture) {
+              el.picture = this.http + "/" + el.picture;
+            }
+          })
           for (const item of this.listPost) {
             item.showMore = false;
             item.showCMT = true;

@@ -68,7 +68,7 @@
       </div>
       <div class="__image" *ngIf="item?.picture !== ''">
         <img
-          [src]="item?.picture_url"
+          [src]="item?.picture"
           alt="hinh bai dang"
           onerror="this.src='assets/img/avatar_template.jpg';"
         />
@@ -146,6 +146,7 @@
         </form>
         <div class="text-right">
           <a
+            style="color: black !important"
             class="more text-light font-weight-bold"
             role="button"
             (click)="item.limit = item.limit + 5"
@@ -160,99 +161,102 @@
 </div>
 <!-- Modal -->
 <div
-  class="modal fade"
-  id="addModal"
-  tabindex="-1"
-  aria-labelledby="addModalLabel"
-  aria-hidden="true"
+class="modal fade"
+id="addModal"
+tabindex="-1"
+aria-labelledby="addModalLabel"
+aria-hidden="true"
 >
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content">
-      <div class="modal-body">
-        <form (ngSubmit)="onSubmitPosts(formPost.value)" [formGroup]="formPost">
-          <div class="row mb-2">
-            <div class="col-md-2 my-auto">
-              <label class="m-0 text-dark">Quận</label>
-            </div>
-            <div class="col-md-10">
-              <select
-                class="custom-select text-dark"
-                id="state"
-                formControlName="state"
-              >
-                <ng-container *ngFor="let item of dataDistricts">
-                  <option [value]="item.name">{{ item.name }}</option>
-                </ng-container>
-              </select>
-            </div>
+<div class="modal-dialog modal-dialog-centered modal-lg">
+  <div class="modal-content">
+    <div class="modal-body">
+      <form
+        (ngSubmit)="onSubmitPosts(formPost.value)"
+        [formGroup]="formPost"
+      >
+        <div class="row mb-2">
+          <div class="col-md-2 my-auto">
+            <label class="m-0 text-dark">Quận</label>
           </div>
-          <div class="row mb-2">
-            <div class="col-md-2 my-auto">
-              <label class="m-0 text-dark">Ảnh</label>
-            </div>
-            <div class="col-md-10">
-              <div class="form-group __img">
-                <label for="upload-photo">Chọn ảnh...</label>
-                <input
-                  type="file"
-                  name="photo"
-                  id="upload-photo"
-                  accept=".png, .jpg, .jpeg"
-                  enctype="multipart/form-data"
-                  (change)="onSelectFile($event)"
-                  formControlName="img"
-                />
-                <input
-                  type="text"
-                  name="upload-img"
-                  class="form-control __custom"
-                  placeholder="chọn hình ảnh Hoa Lan của bạn"
-                  value="{{ formPost.get('img').value }}"
-                  autocomplete="off"
-                />
-              </div>
-            </div>
+          <div class="col-md-10">
+            <select
+              class="custom-select text-dark"
+              id="state"
+              formControlName="state"
+            >
+              <ng-container *ngFor="let item of dataDistricts">
+                <option [value]="item.name">{{ item.name }}</option>
+              </ng-container>
+            </select>
           </div>
-          <div class="row mb-2">
-            <div class="col-md-2">
-              <label class="m-0 text-dark">Nội dung</label>
-            </div>
-            <div class="col-md-10">
-              <textarea
+        </div>
+        <div class="row mb-2">
+          <div class="col-md-2 my-auto">
+            <label class="m-0 text-dark">Ảnh</label>
+          </div>
+          <div class="col-md-10">
+            <div class="form-group __img">
+              <label for="upload-photo">Chọn ảnh...</label>
+              <input
+                type="file"
+                name="photo"
+                id="upload-photo"
+                accept=".png, .jpg, .jpeg"
+                enctype="multipart/form-data"
+                (change)="onSelectFile($event)"
+                formControlName="img"
+              />
+              <input
                 type="text"
-                name="name"
-                id="nd"
-                cols="30"
-                rows="10"
-                class="form-control"
-                placeholder="noi dung"
-                formControlName="description"
-              ></textarea>
+                name="upload-img"
+                class="form-control __custom"
+                placeholder="chọn hình ảnh Hoa Lan của bạn"
+                value="{{ formPost.get('img').value }}"
+                autocomplete="off"
+              />
             </div>
           </div>
-
-          <div class="text-right">
-            <button
-              id="close"
-              type="button"
-              class="btn btn-secondary mr-3"
-              data-dismiss="modal"
-            >
-              Đóng
-            </button>
-            <button
-              type="submit"
-              class="btn btn-success"
-              [disabled]="
-                formPost.get('description').invalid ||
-                formPost.get('state').invalid
-              "
-            >
-              Thêm
-            </button>
+        </div>
+        <div class="row mb-2">
+          <div class="col-md-2">
+            <label class="m-0 text-dark">Nội dung</label>
           </div>
-        </form>
-      </div>
+          <div class="col-md-10">
+            <textarea
+              type="text"
+              name="name"
+              id="nd"
+              cols="30"
+              rows="10"
+              class="form-control"
+              placeholder="noi dung"
+              formControlName="description"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="text-right">
+          <button
+            id="close"
+            type="button"
+            class="btn btn-secondary mr-3"
+            data-dismiss="modal"
+          >
+            Đóng
+          </button>
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="
+              formPost.get('description').invalid ||
+              formPost.get('state').invalid
+            "
+          >
+            Thêm
+          </button>
+        </div>
+      </form>
     </div>
   </div>
+</div>
 </div>
