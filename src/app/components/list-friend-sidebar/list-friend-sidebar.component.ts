@@ -35,6 +35,7 @@ export class ListFriendSideBarComponent implements OnInit {
 
   onChangeVisible = () => {
     this.isVisibleChat = !this.isVisibleChat;
+    this.onCallAPIGetListFriend();
   };
 
   onOpenChat = (index, user) => {

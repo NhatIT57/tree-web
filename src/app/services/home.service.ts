@@ -110,4 +110,7 @@ export class HomeService {
   public createMess(data): Observable<any> {
     return this.http.post<any>(`/createMess`, data);
   }
+  public cancelFriend(data): Observable<any> {
+    return this.http.post<any>(`/cancelFriend`, data);
+  }
 }

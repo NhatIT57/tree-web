@@ -90,16 +90,15 @@ export class ProfileComponent implements OnInit, DoCheck {
     this.idCurrent = localStorage.getItem('id');
     this.role = localStorage.getItem('role');
     this.paramID = this.route.snapshot.paramMap.get('id');
-    // if (this.idCurrent != this.paramID) {
-    //   this.checkFriend = true;
-    //   this.textFriend = 'Kết bạn';
-    // }
+    if (this.idCurrent != this.paramID) {
+      this.checkFriend = true;
+      this.textFriend = 'Kết bạn';
+    }
     this.callProfile();
     this.callFlower();
     this.getDataProfile();
     this.getDataListFlower();
     this.toTop();
-
     this.callListFriend();
   }
 
@@ -121,17 +120,36 @@ export class ProfileComponent implements OnInit, DoCheck {
     });
   }
 
+  delFriend() {
+    const postBody = {
+      targetUserId: this.idCurrent,
+      userId: this.paramID,
+    };
+    this.serviceHome.cancelFriend(postBody).subscribe((res) => {
+      if (res) {
+        this.toastr.success('Xóa kết bạn thành công!');
+        this.checkInvite = true;
+        this.checkCancelFriend = false;
+        this.textFriend = 'Kết bạn';
+        // this.callListFriend();
+      } else {
+        this.toastr.error('Xóa kết bạn thất bại!');
+      }
+    });
+  }
 
-  callListFriend () {
+  callListFriend() {
     this.serviceHome.getListFriend(this.idCurrent).subscribe((res) => {
       if (res) {
         for (let index = 0; index < res.length; index++) {
-            if (res.id == this.paramID) {
-              this.checkCancelFriend = true;
-              this.textFriend = 'Đã kết bạn';
-            } else {
-              // this.getListInvite();
-            }
+          if (res[index]._id == this.paramID) {
+            this.checkCancelFriend = true;
+            this.textFriend = 'Đã kết bạn';
+            break;
+          } else {
+            this.getListInvite();
+            break;
+          }
         }
       }
     });
@@ -153,7 +171,7 @@ export class ProfileComponent implements OnInit, DoCheck {
       userId: this.idCurrent,
       targetUserId: this.paramID,
     };
-    if (this.checkInvite) {
+    if (this.textFriend != 'Đã kết bạn') {
       this.serviceHome.addFriend(postBody).subscribe((res) => {
         if (res.status) {
           this.toastr.success('Gửi lời mời kết bạn thành công !');
@@ -161,6 +179,8 @@ export class ProfileComponent implements OnInit, DoCheck {
         }
       });
     }
+    // if (this.checkInvite) {
+    // }
   }
 
   deletePet__ByID(idUser, idPet): void {
@@ -318,7 +338,8 @@ export class ProfileComponent implements OnInit, DoCheck {
         if (data) {
           this.dataProfile = data[0];
           if (this.dataProfile.picture) {
-            this.dataProfile.picture = this.http + "/" + this.dataProfile.picture;
+            this.dataProfile.picture =
+              this.http + '/' + this.dataProfile.picture;
           }
           this.formProfile.patchValue({
             userID: this.dataProfile?.id,
@@ -354,15 +375,13 @@ export class ProfileComponent implements OnInit, DoCheck {
           data[0].active = true;
         }
         this.arrFlower = data;
-        this.arrFlower.map (el => {
+        this.arrFlower.map((el) => {
           if (el.picture) {
-            el.picture = this.http + "/" + el.picture;
+            el.picture = this.http + '/' + el.picture;
           }
-        })
+        });
       },
       (err) => {}
     );
   }
-
-
 }
