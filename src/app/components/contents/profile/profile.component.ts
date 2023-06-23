@@ -28,44 +28,7 @@ export class ProfileComponent implements OnInit, DoCheck {
   isStatuss;
   arrFlower = [];
 
-  slidesStore = [
-    {
-      url: 'https://i.pinimg.com/564x/ac/26/8d/ac268d2334265637f8be3fb06e0fcff1.jpg',
-      namePet: 'Lulu',
-      color: 'trắng xám',
-      category: 'husky',
-      birthdate: '22/12/2012',
-      id: '1',
-      active: true,
-    },
-    {
-      url: 'https://i.pinimg.com/736x/95/a3/da/95a3da17973b16c830dc9ba06216673e.jpg',
-      namePet: 'Lulu',
-      color: 'trắng xám',
-      category: 'husky',
-      birthdate: '22/12/2012',
-      id: '2',
-      active: false,
-    },
-    {
-      url: '',
-      namePet: 'Lulu',
-      color: 'trắng xám',
-      category: 'husky',
-      birthdate: '22/12/2012',
-      id: '3',
-      active: false,
-    },
-    {
-      url: 'https://i.pinimg.com/736x/95/a3/da/95a3da17973b16c830dc9ba06216673e.jpg',
-      namePet: 'Lulu',
-      color: 'trắng xám',
-      category: 'husky',
-      birthdate: '22/12/2012',
-      id: '4',
-      active: false,
-    },
-  ];
+
   paramID;
   oldParamID;
   role;
@@ -77,6 +40,7 @@ export class ProfileComponent implements OnInit, DoCheck {
   textRejectFriend: string = 'Hủy lời mời kết bạn';
   checkInvite: boolean = true;
   checkCancelFriend: boolean = false;
+  checkLenghtArr: Number =  0;
   constructor(
     private serviceHome: HomeService,
     private form: FormBuilder,
@@ -90,16 +54,13 @@ export class ProfileComponent implements OnInit, DoCheck {
     this.idCurrent = localStorage.getItem('id');
     this.role = localStorage.getItem('role');
     this.paramID = this.route.snapshot.paramMap.get('id');
-    if (this.idCurrent != this.paramID) {
-      this.checkFriend = true;
-      this.textFriend = 'Kết bạn';
-    }
+    this.callListFriend();
+
     this.callProfile();
     this.callFlower();
     this.getDataProfile();
     this.getDataListFlower();
     this.toTop();
-    this.callListFriend();
   }
 
   toTop(): void {
@@ -140,18 +101,25 @@ export class ProfileComponent implements OnInit, DoCheck {
 
   callListFriend() {
     this.serviceHome.getListFriend(this.idCurrent).subscribe((res) => {
-      if (res) {
+      if (res.length > 0) {
+        if ((this.idCurrent != this.paramID) && this.checkLenghtArr == 0) {
+          this.checkFriend = true;
+          this.textFriend = 'Kết bạn';
+        }
+        this.checkLenghtArr = res.length;
         for (let index = 0; index < res.length; index++) {
-          if (res[index]._id == this.paramID) {
+          if (res[index].id == this.paramID) {
             this.checkCancelFriend = true;
             this.textFriend = 'Đã kết bạn';
             break;
           } else {
             this.getListInvite();
-            break;
           }
         }
+      } else {
+        this.getListInvite();
       }
+
     });
   }
 

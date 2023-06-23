@@ -45,9 +45,10 @@ export class ListFriendSideBarComponent implements OnInit {
       targetUserId: user._id,
     };
     this.callHistoryMess(params, index);
+    // gọi 1s 1 lần
     this.mesInterval = setInterval(() => {
       this.callHistoryMess(params, index);
-    }, 3000);
+    }, 1000);
   };
 
   onCloseChat = (index) => {

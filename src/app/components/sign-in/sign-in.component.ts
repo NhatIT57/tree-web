@@ -90,7 +90,7 @@ export class SignInComponent implements OnInit, OnChanges {
         document.querySelector('.ham3').classList.remove('active');
         document.querySelector('.navbar-collapse').classList.remove('show');
         document.querySelector('.over').classList.remove('overlay');
-        document.querySelector('.modal-backdrop').remove();
+        // document.querySelector('.modal-backdrop').remove();
         //#endregion
         window.location.href= `profile/${data.id}`;
         // this.router.navigateByUrl(`profile/${data.id}`);

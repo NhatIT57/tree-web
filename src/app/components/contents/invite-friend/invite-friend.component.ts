@@ -55,7 +55,7 @@ export class InviteFriendComponent implements OnInit {
       targetUserId: item._id,
     };
     this.serviceHome.rejectFriend(postBody).subscribe((res) => {
-      if (res.status) {
+      if (!res.status) {
         this.toastr.success('Hủy lời mời kết bạn thành công !');
         this.getListInvite();
       } else {
